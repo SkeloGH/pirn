@@ -1,5 +1,7 @@
 import { IConfig, IDataClient, IJsonConfig, IQuery } from './interfaces';
 
+const filterByType = (type: string) => (client: IDataClient) => client.type === type;
+
 class Pirn {
   dataClients: IDataClient[];
   dataSources: IDataClient[];
@@ -15,12 +17,12 @@ class Pirn {
   constructor(config: IConfig) {
     // this.collect = new Collect(config);
     // this.digest = new Digest(config);
-    this.queries = config.queries;
     this.dataClients = config.dataClients;
+    this.dataSources = this.dataClients.filter(filterByType('source'));
+    this.dataTargets = this.dataClients.filter(filterByType('target'));
     this.jsonConfig = config.jsonConfig;
-    this.dataSources = this.dataClients.filter((client) => client.type === 'source');
-    this.dataTargets = this.dataClients.filter((client) => client.type === 'target');
+    this.queries = config.queries;
   }
 }
 
-export default Pirn;
+export { Pirn, filterByType };

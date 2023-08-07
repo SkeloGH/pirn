@@ -42,6 +42,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Dependency artifacts
+package-lock.json
+
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 
@@ -121,6 +124,9 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+
+# Visual Studio Code workspace settings
+*.code-workspace
 
 # yarn v2
 .yarn/cache

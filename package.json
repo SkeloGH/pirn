@@ -4,7 +4,7 @@
   "description": "Data migration and synchronization tool supporting multiple data stores with a plugin system for extensibility.",
   "main": "index.js",
   "author": "Aaron Gonzalez",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "test": "jest",
     "lint": "eslint src",
@@ -16,7 +16,6 @@
     "@typescript-eslint/parser": "^6.2.1",
     "eslint": "^8.46.0",
     "husky": "^8.0.0",
-    "jest": "^29.6.2",
     "lint-staged": "^13.2.3",
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6"

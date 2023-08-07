@@ -6,7 +6,7 @@
   "author": "Aaron Gonzalez",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint src",
     "prepare": "husky install"
   },

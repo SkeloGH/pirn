@@ -31,5 +31,9 @@ interface IIgnoreField {
   clientId: string;
   field: string;
 }
+interface IIgnoreTable {
+  clientId: string;
+  table: string;
+}
 
-export { IDataClient, IQuery, IConfig, IIgnoreField };
+export { IDataClient, IQuery, IConfig, IIgnoreField, IIgnoreTable };

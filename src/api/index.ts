@@ -1,4 +1,4 @@
-import { IConfig, IDataClient, IQuery, IIgnoreField } from 'interfaces';
+import { IConfig, IDataClient, IQuery, IIgnoreField, IIgnoreTable } from 'interfaces';
 import {
   dataClients,
   dataSources,
@@ -23,6 +23,18 @@ import {
   getQuery,
   getQueries,
 } from 'api/queries';
+import {
+  addIgnoreField,
+  addIgnoreFields,
+  removeIgnoreField,
+  removeIgnoreFields,
+  getIgnoreFields,
+  addIgnoreTable,
+  addIgnoreTables,
+  removeIgnoreTable,
+  removeIgnoreTables,
+  getIgnoreTables,
+} from 'api/ignores';
 
 
 class Pirn {
@@ -32,6 +44,7 @@ class Pirn {
   public JSONDumpPath?: string = undefined;
   public queries: IQuery[] = [];
   public ignoreFields: IIgnoreField[] = [];
+  public ignoreTables: IIgnoreTable[] = [];
 
   constructor(config?: IConfig) {
     if (config) {
@@ -92,6 +105,36 @@ class Pirn {
   }
   public getQuery = getQuery
   public getQueries = getQueries
+
+  // Ignore field methods
+  public addIgnoreField = (clientId: string, field: string) => {
+    this.ignoreFields = addIgnoreField(clientId, field);
+  }
+  public addIgnoreFields = (clientId: string, fields: string[]) => {
+    this.ignoreFields = addIgnoreFields(clientId, fields);
+  }
+  public removeIgnoreField = (clientId: string, field: string) => {
+    this.ignoreFields = removeIgnoreField(clientId, field);
+  }
+  public removeIgnoreFields = (clientId: string, fields: string[]) => {
+    this.ignoreFields = removeIgnoreFields(clientId, fields);
+  }
+  public getIgnoreFields = getIgnoreFields;
+
+  // Ignore table methods
+  public addIgnoreTable = (clientId: string, table: string) => {
+    this.ignoreTables = addIgnoreTable(clientId, table);
+  }
+  public addIgnoreTables = (clientId: string, tables: string[]) => {
+    this.ignoreTables = addIgnoreTables(clientId, tables);
+  }
+  public removeIgnoreTable = (clientId: string, table: string) => {
+    this.ignoreTables = removeIgnoreTable(clientId, table);
+  }
+  public removeIgnoreTables = (clientId: string, tables: string[]) => {
+    this.ignoreTables = removeIgnoreTables(clientId, tables);
+  }
+  public getIgnoreTables = getIgnoreTables;
 }
 
 export default Pirn;

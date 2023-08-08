@@ -1,4 +1,4 @@
-import { IDataClient, IConfig, IQuery } from "interfaces";
+import { IDataClient, IConfig, IQuery, IIgnoreField, IIgnoreTable } from "interfaces";
 
 const JSONDumpPath = process.cwd() + "/pirn-dump.json";
 const client:IDataClient = {
@@ -37,6 +37,17 @@ const query:IQuery = {
   },
 };
 
+const ignoreField:IIgnoreField = {
+  clientId: "client",
+  field: "password",
+}
+const ignoreFields:IIgnoreField[] = [ignoreField];
+const ignoreTable:IIgnoreTable = {
+  clientId: "client",
+  table: "secrets",
+};
+const ignoreTables:IIgnoreTable[] = [ignoreTable];
+
 export {
   JSONDumpPath,
   sourceClient,
@@ -45,4 +56,8 @@ export {
   client,
   clients,
   query,
+  ignoreField,
+  ignoreFields,
+  ignoreTable,
+  ignoreTables,
 }

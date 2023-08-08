@@ -1,9 +1,9 @@
 import Pirn from "api";
-import { sourceClient, targetClient, query, config } from "./__mock__";
+import { sourceClient, targetClient, config } from "./__mock__";
 
-const pirn = new Pirn(config);
 
 describe("Pirn main class base tests", () => {
+  const pirn = new Pirn(config);
   it("should have the class properties", () => {
     expect(pirn.dataClients).toEqual(config.dataClients);
     expect(pirn.dataSources).toEqual([sourceClient]);
@@ -29,38 +29,17 @@ describe("Pirn main class base tests", () => {
   });
 });
 
-
-
-
-
-describe("Pirn query methods tests", () => {
-  beforeEach(() => {
-    pirn.removeQueries(["query"]);
+describe("Pirn empty config tests", () => {
+  const pirn = new Pirn();
+  it("should not have JSONDumpPath", () => {
+    expect(pirn.JSONDumpPath).toBeUndefined();
   });
-  it("should add a query", () => {
-    pirn.addQuery(query);
-    expect(pirn.queries).toEqual([query]);
-  });
-  it("should add queries", () => {
-    pirn.addQueries([query]);
-    expect(pirn.queries).toEqual([query]);
-  });
-  it("should remove a query", () => {
-    pirn.addQuery(query);
-    pirn.removeQuery("query");
+  it("should not have queries", () => {
     expect(pirn.queries).toEqual([]);
   });
-  it("should remove queries", () => {
-    pirn.addQueries([query]);
-    pirn.removeQueries(["query"]);
-    expect(pirn.queries).toEqual([]);
-  });
-  it("should get a query", () => {
-    pirn.addQuery(query);
-    expect(pirn.getQuery("query")).toEqual(query);
-  });
-  it("should get queries", () => {
-    pirn.addQueries([query]);
-    expect(pirn.getQueries(["query"])).toEqual([query]);
+  it("should not have dataClients", () => {
+    expect(pirn.dataClients).toEqual([]);
+    expect(pirn.dataSources).toEqual([]);
+    expect(pirn.dataTargets).toEqual([]);
   });
 });

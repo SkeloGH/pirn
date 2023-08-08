@@ -1,140 +1,63 @@
-import { IConfig, IDataClient, IQuery, IIgnoreField, IIgnoreTable } from 'interfaces';
-import {
-  dataClients,
-  dataSources,
-  dataTargets,
-  addClient,
-  addClients,
-  removeClient,
-  removeClients,
-  getClient,
-  getClients,
-} from 'api/clients';
-import {
-  setJSONDumpPath,
-  getJSONDumpPath,
-} from 'api/dumps';
-import {
-  queries,
-  addQuery,
-  addQueries,
-  removeQuery,
-  removeQueries,
-  getQuery,
-  getQueries,
-} from 'api/queries';
-import {
-  addIgnoreField,
-  addIgnoreFields,
-  removeIgnoreField,
-  removeIgnoreFields,
-  getIgnoreFields,
-  addIgnoreTable,
-  addIgnoreTables,
-  removeIgnoreTable,
-  removeIgnoreTables,
-  getIgnoreTables,
-} from 'api/ignores';
+import { IConfig } from 'interfaces';
+import DataClientsAPI from 'api/clients';
+import QueriesAPI from 'api/queries';
+import DumpsAPI from 'api/dumps';
+import IgnoresAPI from 'api/ignores';
 
 
 class Pirn {
-  public dataClients: IDataClient[] = [];
-  public dataSources: IDataClient[] = [];
-  public dataTargets: IDataClient[] = [];
-  public JSONDumpPath?: string = undefined;
-  public queries: IQuery[] = [];
-  public ignoreFields: IIgnoreField[] = [];
-  public ignoreTables: IIgnoreTable[] = [];
+  private clientsAPI: DataClientsAPI = new DataClientsAPI();
+  private queriesAPI: QueriesAPI = new QueriesAPI();
+  private dumpsAPI: DumpsAPI = new DumpsAPI();
+  private ignoresAPI: IgnoresAPI = new IgnoresAPI();
 
   constructor(config?: IConfig) {
     if (config) {
-      if (config.dataClients) this.addClients(config.dataClients);
-      if (config.JSONDumpPath) this.setJSONDumpPath(config.JSONDumpPath);
+      if (config.dataClients) this.clientsAPI.addClients(config.dataClients);
+      if (config.JSONDumpPath) this.dumpsAPI.setJSONDumpPath(config.JSONDumpPath);
       if (config.queries) this.addQueries(config.queries);
     }
   }
 
   // Client methods
-  private resetDataClients = () => {
-    this.dataClients = dataClients;
-    this.dataSources = dataSources;
-    this.dataTargets = dataTargets;
-  }
-
-  public addClient = (client: IDataClient) => {
-    addClient(client);
-    this.resetDataClients();
-  }
-  public addClients = (clients: IDataClient[]) => {
-    addClients(clients);
-    this.resetDataClients();
-  }
-  public removeClient = (clientId: string) => {
-    removeClient(clientId);
-    this.resetDataClients();
-  }
-  public removeClients = (clientIds: string[]) => {
-    removeClients(clientIds);
-    this.resetDataClients();
-  }
-  public getClient = getClient;
-  public getClients = getClients;
+  public addClient = this.clientsAPI.addClient;
+  public addClients = this.clientsAPI.addClients;
+  public removeClient = this.clientsAPI.removeClient;
+  public removeClients = this.clientsAPI.removeClients;
+  public getClient = this.clientsAPI.getClient;
+  public getClients = this.clientsAPI.getClients;
+  public getSourceClients = this.clientsAPI.getSourceClients;
+  public getTargetClients = this.clientsAPI.getTargetClients;
+  public resetDataClients = this.clientsAPI.resetDataClients;
 
   // JSON dump path methods
-  public setJSONDumpPath = (path: string) => {
-    this.JSONDumpPath = setJSONDumpPath(path);
-  }
-  public getJSONDumpPath = getJSONDumpPath;
+  public setJSONDumpPath = this.dumpsAPI.setJSONDumpPath;
+  public getJSONDumpPath = this.dumpsAPI.getJSONDumpPath;
 
   // Query methods
-  public addQuery = (query: IQuery) => {
-    addQuery(query);
-    this.queries = queries;
-  }
-  public addQueries = (queries: IQuery[]) => {
-    addQueries(queries);
-    this.queries = queries;
-  }
-  public removeQuery = (queryId: string) => {
-    removeQuery(queryId);
-    this.queries = queries;
-  }
-  public removeQueries = (queryIds: string[]) => {
-    removeQueries(queryIds);
-    this.queries = queries;
-  }
-  public getQuery = getQuery
-  public getQueries = getQueries
+  public addQuery = this.queriesAPI.addQuery;
+  public addQueries = this.queriesAPI.addQueries;
+  public removeQuery = this.queriesAPI.removeQuery;
+  public removeQueries = this.queriesAPI.removeQueries;
+  public getQuery = this.queriesAPI.getQuery;
+  public getQueries = this.queriesAPI.getQueries;
 
   // Ignore field methods
-  public addIgnoreField = (clientId: string, field: string) => {
-    this.ignoreFields = addIgnoreField(clientId, field);
-  }
-  public addIgnoreFields = (clientId: string, fields: string[]) => {
-    this.ignoreFields = addIgnoreFields(clientId, fields);
-  }
-  public removeIgnoreField = (clientId: string, field: string) => {
-    this.ignoreFields = removeIgnoreField(clientId, field);
-  }
-  public removeIgnoreFields = (clientId: string, fields: string[]) => {
-    this.ignoreFields = removeIgnoreFields(clientId, fields);
-  }
-  public getIgnoreFields = getIgnoreFields;
+  public addIgnoreField = this.ignoresAPI.addIgnoreField;
+  public addIgnoreFields = this.ignoresAPI.addIgnoreFields;
+  public removeIgnoreField = this.ignoresAPI.removeIgnoreField;
+  public removeIgnoreFields = this.ignoresAPI.removeIgnoreFields;
+  public getIgnoreFields = this.ignoresAPI.getIgnoreFields;
 
   // Ignore table methods
-  public addIgnoreTable = (clientId: string, table: string) => {
-    this.ignoreTables = addIgnoreTable(clientId, table);
-  }
-  public addIgnoreTables = (clientId: string, tables: string[]) => {
-    this.ignoreTables = addIgnoreTables(clientId, tables);
-  }
-  public removeIgnoreTable = (clientId: string, table: string) => {
-    this.ignoreTables = removeIgnoreTable(clientId, table);
-  }
-  public removeIgnoreTables = (clientId: string, tables: string[]) => {
-    this.ignoreTables = removeIgnoreTables(clientId, tables);
-  }
-  public getIgnoreTables = getIgnoreTables;
+  public addIgnoreTable = this.ignoresAPI.addIgnoreTable;
+  public addIgnoreTables = this.ignoresAPI.addIgnoreTables;
+  public removeIgnoreTable = this.ignoresAPI.removeIgnoreTable;
+  public removeIgnoreTables = this.ignoresAPI.removeIgnoreTables;
+  public getIgnoreTables = this.ignoresAPI.getIgnoreTables;
+
 }
+
+
 
 export default Pirn;

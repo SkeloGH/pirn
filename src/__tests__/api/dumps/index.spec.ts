@@ -7,9 +7,9 @@ describe("Pirn JSON dump path methods tests", () => {
 
   it("should set the JSON dump path", () => {
     pirn.setJSONDumpPath(JSONDumpPath);
-    expect(pirn.JSONDumpPath).toEqual(JSONDumpPath);
+    expect(pirn.getJSONDumpPath()).toEqual(JSONDumpPath);
   });
   it("should get the JSON dump path", () => {
-    expect(pirn.getJSONDumpPath()).toEqual(pirn.JSONDumpPath);
+    expect(pirn.getJSONDumpPath()).toEqual(pirn.getJSONDumpPath());
   });
 });

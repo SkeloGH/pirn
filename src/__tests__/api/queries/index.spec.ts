@@ -9,21 +9,21 @@ describe("Pirn query methods tests", () => {
   });
   it("should add a query", () => {
     pirn.addQuery(query);
-    expect(pirn.queries).toEqual([query]);
+    expect(pirn.getQueries()).toEqual([query]);
   });
   it("should add queries", () => {
     pirn.addQueries([query]);
-    expect(pirn.queries).toEqual([query]);
+    expect(pirn.getQueries()).toEqual([query]);
   });
   it("should remove a query", () => {
     pirn.addQuery(query);
     pirn.removeQuery("query");
-    expect(pirn.queries).toEqual([]);
+    expect(pirn.getQueries()).toEqual([]);
   });
   it("should remove queries", () => {
     pirn.addQueries([query]);
     pirn.removeQueries(["query"]);
-    expect(pirn.queries).toEqual([]);
+    expect(pirn.getQueries()).toEqual([]);
   });
   it("should get a query", () => {
     pirn.addQuery(query);

@@ -12,7 +12,7 @@ interface IDataClient {
   }
 }
 interface IQuery {
-  id?: string;
+  id: string;
   clientId?: string;
   from: string[];
   where: string | {

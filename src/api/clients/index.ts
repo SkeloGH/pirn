@@ -1,37 +1,55 @@
 import { IDataClient } from 'interfaces';
 import { spliceByKeyValue } from 'utils';
 
-const dataClients: IDataClient[] = [];
-const dataSources: IDataClient[] = [];
-const dataTargets: IDataClient[] = [];
+class DataClientsAPI {
+  private dataClients: IDataClient[] = [];
+  private dataSources: IDataClient[] = [];
+  private dataTargets: IDataClient[] = [];
 
-const addClient = (client: IDataClient) => {
-  dataClients.push(client);
-  if (client.type === 'source') {
-    dataSources.push(client);
-  } else if (client.type === 'target') {
-    dataTargets.push(client);
+  resetDataClients = () => {
+    this.dataClients = [];
+    this.dataSources = [];
+    this.dataTargets = [];
+  }
+  addClient = (client: IDataClient) => {
+    this.dataClients.push(client);
+    if (client.type === 'source') {
+      this.dataSources.push(client);
+    } else if (client.type === 'target') {
+      this.dataTargets.push(client);
+    }
+    return this.dataClients;
+  }
+  addClients = (clients: IDataClient[]) => {
+    clients.forEach(this.addClient);
+    return this.dataClients;
+  }
+  removeClient = (clientId: string) => {
+    spliceByKeyValue(this.dataClients, 'clientId', clientId);
+    spliceByKeyValue(this.dataSources, 'clientId', clientId);
+    spliceByKeyValue(this.dataTargets, 'clientId', clientId);
+    return this.dataClients;
+  }
+  removeClients = (clientIds: string[]) => {
+    clientIds.forEach(this.removeClient);
+    return this.dataClients;
+  }
+  getClient = (clientId: string) => this.dataClients.find(client => client.clientId === clientId);
+  getClients = (clientIds?: string[]) => {
+    if (clientIds) {
+      return this.dataClients.filter(client => clientIds.includes(client.clientId));
+    }
+    return this.dataClients;
+  }
+  getSourceClients = () => {
+    return this.dataSources;
+  }
+  getTargetClients = () => {
+    return this.dataTargets;
   }
 }
-const addClients = (clients: IDataClient[]) => clients.forEach(addClient);
-const removeClient = (clientId: string) => {
-  spliceByKeyValue(dataClients, 'clientId', clientId);
-  spliceByKeyValue(dataSources, 'clientId', clientId);
-  spliceByKeyValue(dataTargets, 'clientId', clientId);
-  return dataClients;
-}
-const removeClients = (clientIds: string[]) => clientIds.forEach(removeClient);
-const getClient = (clientId: string) => dataClients.find(client => client.clientId === clientId);
-const getClients = (clientIds: string[]) => clientIds.map(getClient);
 
-export {
-  dataClients,
-  dataSources,
-  dataTargets,
-  addClient,
-  addClients,
-  removeClient,
-  removeClients,
-  getClient,
-  getClients,
-};
+
+
+
+export default DataClientsAPI;

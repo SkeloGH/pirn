@@ -18,21 +18,21 @@ describe("Pirn ignore fields tests", () => {
   });
   it("should add an ignore field", () => {
     pirn.addIgnoreField(ignoreField.clientId, ignoreField.field);
-    expect(pirn.ignoreFields).toEqual([ignoreField]);
+    expect(pirn.getIgnoreFields()).toEqual([ignoreField]);
   });
   it("should add ignore fields", () => {
     pirn.addIgnoreFields(ignoreField.clientId, [ignoreField.field]);
-    expect(pirn.ignoreFields).toEqual(ignoreFields);
+    expect(pirn.getIgnoreFields()).toEqual(ignoreFields);
   });
   it("should remove an ignore field", () => {
     pirn.addIgnoreField(ignoreField.clientId, ignoreField.field);
     pirn.removeIgnoreField(ignoreField.clientId, ignoreField.field);
-    expect(pirn.ignoreFields).toEqual([]);
+    expect(pirn.getIgnoreFields()).toEqual([]);
   });
   it("should remove ignore fields", () => {
     pirn.addIgnoreField(ignoreField.clientId, ignoreField.field);
     pirn.removeIgnoreFields(ignoreField.clientId, [ignoreField.field]);
-    expect(pirn.ignoreFields).toEqual([]);
+    expect(pirn.getIgnoreFields()).toEqual([]);
   });
   it("should get ignore fields", () => {
     pirn.addIgnoreFields(ignoreField.clientId, [ignoreField.field]);
@@ -49,21 +49,21 @@ describe("Pirn ignore tables tests", () => {
   });
   it("should add an ignore table", () => {
     pirn.addIgnoreTable(ignoreTable.clientId, ignoreTable.table);
-    expect(pirn.ignoreTables).toEqual([ignoreTable]);
+    expect(pirn.getIgnoreTables()).toEqual([ignoreTable]);
   });
   it("should add ignore tables", () => {
     pirn.addIgnoreTables(ignoreTable.clientId, [ignoreTable.table]);
-    expect(pirn.ignoreTables).toEqual(ignoreTables);
+    expect(pirn.getIgnoreTables()).toEqual(ignoreTables);
   });
   it("should remove an ignore table", () => {
     pirn.addIgnoreTable(ignoreTable.clientId, ignoreTable.table);
     pirn.removeIgnoreTable(ignoreTable.clientId, ignoreTable.table);
-    expect(pirn.ignoreTables).toEqual([]);
+    expect(pirn.getIgnoreTables()).toEqual([]);
   });
   it("should remove ignore tables", () => {
     pirn.addIgnoreTable(ignoreTable.clientId, ignoreTable.table);
     pirn.removeIgnoreTables(ignoreTable.clientId, [ignoreTable.table]);
-    expect(pirn.ignoreTables).toEqual([]);
+    expect(pirn.getIgnoreTables()).toEqual([]);
   });
   it("should get ignore tables", () => {
     pirn.addIgnoreTables(ignoreTable.clientId, [ignoreTable.table]);

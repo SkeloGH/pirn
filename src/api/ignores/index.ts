@@ -1,60 +1,56 @@
 import {  IIgnoreField, IIgnoreTable } from 'interfaces';
-const ignoreFields: IIgnoreField[] = [];
-const ignoreTables: IIgnoreTable[] = [];
 
-// Field methods
-const addIgnoreField = (clientId: string, field: string) => {
-  ignoreFields.push({ clientId, field });
-  return ignoreFields;
-};
-const addIgnoreFields = (clientId: string, fields: string[]) => {
-  fields.forEach(field => addIgnoreField(clientId, field));
-  return ignoreFields;
+class IgnoresAPI {
+  private ignoreFields: IIgnoreField[] = [];
+  private ignoreTables: IIgnoreTable[] = [];
+  
+  // Field methods
+  public addIgnoreField = (clientId: string, field: string) => {
+    this.ignoreFields.push({ clientId, field });
+    return this.ignoreFields;
+  };
+  public addIgnoreFields = (clientId: string, fields: string[]) => {
+    fields.forEach(field => this.addIgnoreField(clientId, field));
+    return this.ignoreFields;
+  }
+  public removeIgnoreField = (clientId: string, field: string) => {
+    this.ignoreFields.splice(
+      this.ignoreFields.findIndex(_ => _.clientId === clientId && _.field === field), 1);
+    return this.ignoreFields;
+  };
+  public removeIgnoreFields = (clientId: string, fields: string[]) => {
+    fields.forEach(field => this.removeIgnoreField(clientId, field));
+    return this.ignoreFields;
+  };
+  public getIgnoreFields = (clientId?: string) => {
+    if (!clientId) return this.ignoreFields;
+    return this.ignoreFields.filter(_ => _.clientId === clientId);
+  }
+  
+  // Table methods
+  public addIgnoreTable = (clientId: string, table: string) => {
+    this.ignoreTables.push({ clientId, table });
+    return this.ignoreTables;
+  };
+  public addIgnoreTables = (clientId: string, tables: string[]) => {
+    tables.forEach(table => this.addIgnoreTable(clientId, table));
+    return this.ignoreTables;
+  };
+  public removeIgnoreTable = (clientId: string, table: string) => {
+    this.ignoreTables.splice(
+      this.ignoreTables.findIndex(_ => _.clientId === clientId && _.table === table), 1);
+    return this.ignoreTables;
+  };
+  public removeIgnoreTables = (clientId: string, tables: string[]) => {
+    tables.forEach(table => this.removeIgnoreTable(clientId, table));
+    return this.ignoreTables;
+  };
+  public getIgnoreTables = (clientId?: string) => {
+    if (!clientId) return this.ignoreTables;
+    return this.ignoreTables.filter(_ => _.clientId === clientId);
+  };
 }
-const removeIgnoreField = (clientId: string, field: string) => {
-  ignoreFields.splice(ignoreFields.findIndex(_ => _.clientId === clientId && _.field === field), 1);
-  return ignoreFields;
-};
-const removeIgnoreFields = (clientId: string, fields: string[]) => {
-  fields.forEach(field => removeIgnoreField(clientId, field));
-  return ignoreFields;
-};
-const getIgnoreFields = (clientId?: string) => {
-  if (!clientId) return ignoreFields;
-  return ignoreFields.filter(_ => _.clientId === clientId);
-}
 
-// Table methods
-const addIgnoreTable = (clientId: string, table: string) => {
-  ignoreTables.push({ clientId, table });
-  return ignoreTables;
-};
-const addIgnoreTables = (clientId: string, tables: string[]) => {
-  tables.forEach(table => addIgnoreTable(clientId, table));
-  return ignoreTables;
-};
-const removeIgnoreTable = (clientId: string, table: string) => {
-  ignoreTables.splice(ignoreTables.findIndex(_ => _.clientId === clientId && _.table === table), 1);
-  return ignoreTables;
-};
-const removeIgnoreTables = (clientId: string, tables: string[]) => {
-  tables.forEach(table => removeIgnoreTable(clientId, table));
-  return ignoreTables;
-};
-const getIgnoreTables = (clientId?: string) => {
-  if (!clientId) return ignoreTables;
-  return ignoreTables.filter(_ => _.clientId === clientId);
-};
 
-export {
-  addIgnoreField,
-  addIgnoreFields,
-  removeIgnoreField,
-  removeIgnoreFields,
-  getIgnoreFields,
-  addIgnoreTable,
-  addIgnoreTables,
-  removeIgnoreTable,
-  removeIgnoreTables,
-  getIgnoreTables
-};
+
+export default IgnoresAPI;

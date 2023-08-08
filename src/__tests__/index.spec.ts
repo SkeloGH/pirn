@@ -5,11 +5,11 @@ import { sourceClient, targetClient, config } from "./__mock__";
 describe("Pirn main class base tests", () => {
   const pirn = new Pirn(config);
   it("should have the class properties", () => {
-    expect(pirn.dataClients).toEqual(config.dataClients);
-    expect(pirn.dataSources).toEqual([sourceClient]);
-    expect(pirn.dataTargets).toEqual([targetClient]);
-    expect(pirn.JSONDumpPath).toEqual(config.JSONDumpPath);
-    expect(pirn.queries).toEqual(config.queries);
+    expect(pirn.getClients()).toEqual(config.dataClients);
+    expect(pirn.getSourceClients()).toEqual([sourceClient]);
+    expect(pirn.getTargetClients()).toEqual([targetClient]);
+    expect(pirn.getJSONDumpPath()).toEqual(config.JSONDumpPath);
+    expect(pirn.getQueries()).toEqual(config.queries);
   });
   it("should have the public methods", () => {
     expect(pirn.addClient).toBeDefined();
@@ -32,14 +32,12 @@ describe("Pirn main class base tests", () => {
 describe("Pirn empty config tests", () => {
   const pirn = new Pirn();
   it("should not have JSONDumpPath", () => {
-    expect(pirn.JSONDumpPath).toBeUndefined();
+    expect(pirn.getJSONDumpPath()).toBeUndefined();
   });
   it("should not have queries", () => {
-    expect(pirn.queries).toEqual([]);
+    expect(pirn.getQueries()).toEqual([]);
   });
   it("should not have dataClients", () => {
-    expect(pirn.dataClients).toEqual([]);
-    expect(pirn.dataSources).toEqual([]);
-    expect(pirn.dataTargets).toEqual([]);
+    expect(pirn.getClients()).toEqual([]);
   });
 });

@@ -11,7 +11,7 @@ Key features:
 ## Installation
 
 ```bash
-npm install @pirn/pirn-core
+npm install --save @pirn/pirn-core
 ```
 
 ## Usage

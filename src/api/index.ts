@@ -1,25 +1,29 @@
-import { IConfig, IDataClient, IQuery } from '../interfaces';
+import { IConfig, IDataClient, IQuery, IIgnoreField } from 'interfaces';
 import {
   dataClients,
   dataSources,
   dataTargets,
-  JSONDumpPath,
-  queries,
   addClient,
   addClients,
   removeClient,
   removeClients,
   getClient,
   getClients,
+} from './clients';
+import {
+  JSONDumpPath,
   setJSONDumpPath,
   getJSONDumpPath,
+} from './dumps';
+import {
+  queries,
   addQuery,
   addQueries,
   removeQuery,
   removeQueries,
   getQuery,
   getQueries,
-} from './methods';
+} from './queries';
 
 
 class Pirn {
@@ -28,6 +32,7 @@ class Pirn {
   public dataTargets: IDataClient[] = [];
   public JSONDumpPath?: string = undefined;
   public queries: IQuery[] = [];
+  public ignoreFields: IIgnoreField[] = [];
 
   constructor(config?: IConfig) {
     if (config) {

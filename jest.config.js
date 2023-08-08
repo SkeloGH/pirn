@@ -10,4 +10,6 @@ module.exports = {
       statements: -10,
     },
   },
+  moduleDirectories: ['node_modules', 'src'],
+  modulePathIgnorePatterns: ['__mock__'],
 };

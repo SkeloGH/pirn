@@ -27,4 +27,9 @@ interface IConfig {
   queries?: IQuery[];
 }
 
-export { IDataClient, IQuery, IConfig };
+interface IIgnoreField {
+  clientId: string;
+  field: string;
+}
+
+export { IDataClient, IQuery, IConfig, IIgnoreField };

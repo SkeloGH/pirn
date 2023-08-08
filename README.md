@@ -11,10 +11,16 @@ Key features:
 ## Installation
 
 ```bash
-npm install -g @pirn/pirn-cli
+npm install @pirn/pirn-core
 ```
 
 ## Usage
+
+```javascript
+import { Pirn } from '@pirn/pirn-core';
+
+const pirn = new Pirn();
+```
 
 ### Defining clients
 

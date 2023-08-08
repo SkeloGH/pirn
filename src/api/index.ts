@@ -9,12 +9,12 @@ import {
   removeClients,
   getClient,
   getClients,
-} from './clients';
+} from 'api/clients';
 import {
   JSONDumpPath,
   setJSONDumpPath,
   getJSONDumpPath,
-} from './dumps';
+} from 'api/dumps';
 import {
   queries,
   addQuery,
@@ -23,7 +23,7 @@ import {
   removeQueries,
   getQuery,
   getQueries,
-} from './queries';
+} from 'api/queries';
 
 
 class Pirn {

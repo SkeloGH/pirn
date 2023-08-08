@@ -47,6 +47,17 @@ class DataClientsAPI {
   getTargetClients = () => {
     return this.dataTargets;
   }
+
+  connect = (clientId: string) => {
+    const client = this.getClient(clientId);
+    if (client) {
+      return client.connect();
+    }
+    return Promise.reject(new Error(`Client ${clientId} not found`));
+  }
+  connectAll = () => {
+    return Promise.all(this.dataClients.map(client => this.connect(client.clientId)));
+  }
 }
 
 

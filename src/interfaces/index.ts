@@ -9,7 +9,8 @@ interface IDataClient {
   };
   clientOptions?: {
     ignoreFields?: string[];
-  }
+  };
+  connect: () => Promise<unknown>;
 }
 interface IQuery {
   id: string;

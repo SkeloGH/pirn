@@ -50,4 +50,21 @@ describe("Pirn client methods tests", () => {
     expect(pirn.getSourceClients()).toEqual([]);
     expect(pirn.getTargetClients()).toEqual([]);
   });
+  it("should connect a client", async () => {
+    pirn.addClient(client);
+    const connection = await pirn.connect(client.clientId);
+    expect(connection).toEqual(undefined);
+  });
+  it("should connect all clients", async () => {
+    pirn.addClients(clients);
+    const connection = await pirn.connectAll();
+    expect(connection).toEqual([undefined, undefined]);
+  });
+  it("should throw an error when connecting a client that doesn't exist", async () => {
+    try {
+      await pirn.connect("client");
+    } catch (err: unknown) {
+      expect((err as Error).message).toEqual("Client client not found");
+    }
+  });
 });

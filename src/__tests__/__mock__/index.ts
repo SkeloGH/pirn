@@ -8,6 +8,7 @@ const client:IDataClient = {
     url: "",
     name: "",
   },
+  connect: async () => {},
 };
 const sourceClient:IDataClient = {
   ...client,

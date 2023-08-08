@@ -176,6 +176,14 @@ Adds multiple fields to ignore when fetching data from a client or clients. See 
 
 Returns the list of fields to ignore for the specified client. If no clientId is provided, the list of fields to ignore for all clients will be returned.
 
+#### `removeIgnoreField(clientId: string, field: string)`
+
+Removes a field from the list of fields to ignore for the specified client. If no clientId is provided, the field will be removed from the list of fields to ignore for all clients. Returns the `ignoreFields` array.
+
+#### `removeIgnoreFields(clientId: string, fields: string[])`
+
+Removes multiple fields from the list of fields to ignore for the specified client or clients. See `removeIgnoreField()` for more information.
+
 #### `addIgnoreTable(clientId: string, table: string)` or `addIgnoreCollection(clientId: string, collection: string)`
 
 Adds a table/collection to ignore when fetching data from a client. The table/collection will be ignored for all queries executed on the client. The table/collection must be added before calling `fetch()`. Returns the `ignoreTables` array. See [Client Options](#client-options) for more information.

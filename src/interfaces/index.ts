@@ -1,6 +1,7 @@
 interface IDataClient {
   type: "source" | "target";
   origin?: IDataClient;
+  clientId: string;
   db: {
     url: string;
     name: string;
@@ -10,18 +11,20 @@ interface IDataClient {
     ignoreFields?: string[];
   }
 }
-interface IJsonConfig {
-  filePath: string;
-}
 interface IQuery {
-  type: string;
-  body: unknown;
-  options?: object;
+  id?: string;
+  clientId?: string;
+  from: string[];
+  where: string | {
+    keys: string[];
+    operator: "eq" | "like" | "in";
+    value: string | string[] | object | object[];
+  };
 }
 interface IConfig {
-  dataClients: IDataClient[];
-  jsonConfig: IJsonConfig;
-  queries: IQuery[];
+  dataClients?: IDataClient[];
+  JSONDumpPath?: string;
+  queries?: IQuery[];
 }
 
-export { IDataClient, IJsonConfig, IQuery, IConfig };
+export { IDataClient, IQuery, IConfig };

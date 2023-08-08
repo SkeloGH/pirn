@@ -31,6 +31,10 @@ class Pirn {
   public resetDataClients = this.clientsAPI.resetDataClients;
   public connect = this.clientsAPI.connect;
   public connectAll = this.clientsAPI.connectAll;
+  public fetch = this.clientsAPI.fetch;
+  public dump = this.clientsAPI.dump;
+  public disconnect = this.clientsAPI.disconnect;
+  public disconnectAll = this.clientsAPI.disconnectAll;
 
   // JSON dump path methods
   public setJSONDumpPath = this.dumpsAPI.setJSONDumpPath;

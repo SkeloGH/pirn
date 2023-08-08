@@ -67,4 +67,24 @@ describe("Pirn client methods tests", () => {
       expect((err as Error).message).toEqual("Client client not found");
     }
   });
+  it("should fetch all clients", async () => {
+    pirn.addClients(clients);
+    const fetch = await pirn.fetch();
+    expect(fetch).toEqual([undefined, undefined]);
+  });
+  it("should dump all clients", async () => {
+    pirn.addClients(clients);
+    const dump = await pirn.dump();
+    expect(dump).toEqual([undefined, undefined]);
+  });
+  it("should disconnect a client", async () => {
+    pirn.addClient(client);
+    const disconnect = await pirn.disconnect(client.clientId);
+    expect(disconnect).toEqual(undefined);
+  });
+  it("should disconnect all clients", async () => {
+    pirn.addClients(clients);
+    const disconnect = await pirn.disconnectAll();
+    expect(disconnect).toEqual([undefined, undefined]);
+  });
 });

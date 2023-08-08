@@ -56,6 +56,23 @@ class DataClientsAPI {
   connectAll = () => {
     return Promise.all(this.dataClients.map(client => this.connect(client.clientId)));
   }
+
+  fetch = () => {
+    return Promise.all(this.dataClients.map(client => client.fetch()));
+  }
+
+  dump = () => {
+    return Promise.all(this.dataClients.map(client => client.dump()));
+  }
+
+  disconnect = (clientId: string) => {
+    const client = this.getClient(clientId);
+    if (client) return client.disconnect();
+    return Promise.reject(new Error(`Client ${clientId} not found`));
+  }
+  disconnectAll = () => {
+    return Promise.all(this.dataClients.map(client => this.disconnect(client.clientId)));
+  }
 }
 
 

@@ -9,6 +9,9 @@ const client:IDataClient = {
     name: "",
   },
   connect: async () => {},
+  fetch: async () => {},
+  dump: async () => {},
+  disconnect: async () => {},
 };
 const sourceClient:IDataClient = {
   ...client,

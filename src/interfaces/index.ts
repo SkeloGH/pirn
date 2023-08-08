@@ -11,6 +11,9 @@ interface IDataClient {
     ignoreFields?: string[];
   };
   connect: () => Promise<unknown>;
+  fetch: () => Promise<unknown>;
+  dump: () => Promise<unknown>;
+  disconnect: () => Promise<unknown>;
 }
 interface IQuery {
   id: string;

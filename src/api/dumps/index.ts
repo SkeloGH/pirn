@@ -1,10 +1,11 @@
-let JSONDumpPath: string = '';
+type TJSONDumpPath = string | undefined;
+let JSONDumpPath: TJSONDumpPath;
 
-const setJSONDumpPath = (path: string ='') => {
+const setJSONDumpPath = (path: TJSONDumpPath):TJSONDumpPath => {
   JSONDumpPath = path;
   return JSONDumpPath;
 };
-const getJSONDumpPath = () => JSONDumpPath;
+const getJSONDumpPath = ():TJSONDumpPath => JSONDumpPath;
 
 export {
   JSONDumpPath,

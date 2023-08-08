@@ -11,7 +11,6 @@ import {
   getClients,
 } from 'api/clients';
 import {
-  JSONDumpPath,
   setJSONDumpPath,
   getJSONDumpPath,
 } from 'api/dumps';
@@ -70,8 +69,7 @@ class Pirn {
 
   // JSON dump path methods
   public setJSONDumpPath = (path: string) => {
-    setJSONDumpPath(path);
-    this.JSONDumpPath = JSONDumpPath;
+    this.JSONDumpPath = setJSONDumpPath(path);
   }
   public getJSONDumpPath = getJSONDumpPath;
 

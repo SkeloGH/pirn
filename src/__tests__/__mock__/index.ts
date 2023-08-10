@@ -23,7 +23,7 @@ const config:IConfig = {
 };
 const query:IQuery = {
   id: "query",
-  clientId: "client",
+  clientId: "mock-client",
   from: ["table"],
   where: {
     keys: ["columnName"],
@@ -33,12 +33,12 @@ const query:IQuery = {
 };
 
 const ignoreField:IIgnoreField = {
-  clientId: "client",
+  clientId: "mock-client",
   field: "password",
 }
 const ignoreFields:IIgnoreField[] = [ignoreField];
 const ignoreTable:IIgnoreTable = {
-  clientId: "client",
+  clientId: "mock-client",
   table: "secrets",
 };
 const ignoreTables:IIgnoreTable[] = [ignoreTable];

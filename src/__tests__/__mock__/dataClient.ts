@@ -1,17 +1,14 @@
-import { IDataClient } from "interfaces";
+import { IDataClientOptions, IDataClient, IDataClientDBConfig, TClientType } from "interfaces";
 
 class MockDataClient implements IDataClient {
-  public type: "source" | "target" = "source";
-  public clientId: string = "client";
-  public db = {
-    url: "url",
-    name: "name",
-    options: {},
+  public type: TClientType = "source";
+  public clientId: string = "mock-client";
+  public db: IDataClientDBConfig = {
+    url: "mock://url",
+    name: "mock-name",
   };
-  public options = {
-    ignoreFields: [],
-    ignoreTables: [],
-  };
+  public options?: IDataClientOptions;
+
   public connect = jest.fn();
   public fetch = jest.fn();
   public dump = jest.fn();

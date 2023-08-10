@@ -1,16 +1,22 @@
-interface IDataClient {
-  type: "source" | "target";
-  origin?: string;
+type TClientType = "source" | "target";
+interface IDataClientOptions {
+  ignoreFields?: string[];
+  ignoreTables?: string[];
+}
+interface IDataClientDBConfig {
+  url: string;
+  name: string;
+  options?: object;
+}
+interface IDataClientConfig {
+  type: TClientType;
   clientId: string;
-  db: {
-    url: string;
-    name: string;
-    options?: object;
-  };
-  options?: {
-    ignoreFields?: string[];
-    ignoreTables?: string[];
-  };
+  origin?: string;
+  db: IDataClientDBConfig;
+  options?: IDataClientOptions
+}
+
+interface IDataClient extends IDataClientConfig {
   connect: () => Promise<unknown>;
   fetch: () => Promise<unknown>;
   dump: () => Promise<unknown>;
@@ -32,14 +38,16 @@ interface IDataClient {
   getIgnoreFields: () => IIgnoreField[];
   getIgnoreTables: () => IIgnoreTable[];
 }
+type TQueryOperator = "eq" | "like" | "in";
+type TQueryValue = string | string[] | object | object[];
 interface IQuery {
   id: string;
   clientId?: string;
   from: string[];
   where: string | {
     keys: string[];
-    operator: "eq" | "like" | "in";
-    value: string | string[] | object | object[];
+    operator: TQueryOperator;
+    value: TQueryValue;
   };
 }
 interface IConfig {
@@ -57,4 +65,15 @@ interface IIgnoreTable {
   table: string;
 }
 
-export { IDataClient, IQuery, IConfig, IIgnoreField, IIgnoreTable };
+export { 
+  TClientType,
+  IDataClientOptions,
+  IDataClientDBConfig,
+  IDataClientConfig,
+  IDataClient,
+  TQueryOperator,
+  IQuery,
+  IConfig,
+  IIgnoreField,
+  IIgnoreTable
+};

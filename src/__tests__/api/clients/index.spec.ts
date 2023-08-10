@@ -10,7 +10,7 @@ import Pirn from "api";
 describe("Pirn clients CRUD tests", () => {
   const pirn = new Pirn(config);
   beforeEach(async () => {
-    await pirn.removeClients(["source-client", "target-client", "client"]);
+    await pirn.removeClients(["source-client", "target-client", "mock-client"]);
   });
 
   it("should add a client", () => {
@@ -38,7 +38,7 @@ describe("Pirn clients CRUD tests", () => {
   });
   it("should remove a client", async () => {
     pirn.addClient(client);
-    await pirn.removeClient("client");
+    await pirn.removeClient("mock-client");
     expect(pirn.getClients()).toEqual([]);
     expect(pirn.getSourceClients()).toEqual([]);
   });
@@ -52,7 +52,7 @@ describe("Pirn clients CRUD tests", () => {
   });
   it("should get a client", () => {
     pirn.addClient(client);
-    expect(pirn.getClient("client")).toEqual(client);
+    expect(pirn.getClient("mock-client")).toEqual(client);
   });
   it("should get clients", () => {
     pirn.addClients(clients);
@@ -100,7 +100,7 @@ describe("Pirn clients CRUD tests", () => {
 describe("Client connection tests", () => {
   const pirn = new Pirn(config);
   beforeEach(async () => {
-    await pirn.removeClients(["source-client", "target-client", "client"]);
+    await pirn.removeClients(["source-client", "target-client", "mock-client"]);
   });
   it("should call dump on all clients", async () => {
     pirn.addClients(clients);
@@ -138,9 +138,9 @@ describe("Client connection tests", () => {
   });
   it("should throw an error when connecting a client that doesn't exist", async () => {
     try {
-      await pirn.connect("client");
+      await pirn.connect("mock-client");
     } catch (err: unknown) {
-      expect((err as Error).message).toEqual("Client client not found");
+      expect((err as Error).message).toEqual("Client mock-client not found");
     }
   });
 });
@@ -148,7 +148,7 @@ describe("Client connection tests", () => {
 describe("Client dump tests", () => {
   const pirn = new Pirn(config);
   beforeEach(async () => {
-    await pirn.removeClients(["source-client", "target-client", "client"]);
+    await pirn.removeClients(["source-client", "target-client", "mock-client"]);
   });
   it("should dump all clients", async () => {
     pirn.addClients(clients);

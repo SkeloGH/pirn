@@ -7,13 +7,30 @@ interface IDataClient {
     name: string;
     options?: object;
   };
-  clientOptions?: {
+  options?: {
     ignoreFields?: string[];
+    ignoreTables?: string[];
   };
   connect: () => Promise<unknown>;
   fetch: () => Promise<unknown>;
   dump: () => Promise<unknown>;
   disconnect: () => Promise<unknown>;
+  addQuery: (query: IQuery) => IQuery[];
+  addQueries: (queries: IQuery[]) => IQuery[];
+  addIgnoreField: (ignoreField: IIgnoreField) => IIgnoreField[];
+  addIgnoreFields: (ignoreFields: IIgnoreField[]) => IIgnoreField[];
+  addIgnoreTable: (ignoreTable: IIgnoreTable) => IIgnoreTable[];
+  addIgnoreTables: (ignoreTables: IIgnoreTable[]) => IIgnoreTable[];
+  removeQuery: (queryId: string) => IQuery[];
+  removeQueries: (queryIds: string[]) => IQuery[];
+  removeIgnoreField: (ignoreFieldId: string) => IIgnoreField[];
+  removeIgnoreFields: (ignoreFieldIds: string[]) => IIgnoreField[];
+  removeIgnoreTable: (ignoreTableId: string) => IIgnoreTable[];
+  removeIgnoreTables: (ignoreTableIds: string[]) => IIgnoreTable[];
+  getQuery: (queryId: string) => IQuery | undefined;
+  getQueries: (queryIds?: string[]) => IQuery[];
+  getIgnoreFields: () => IIgnoreField[];
+  getIgnoreTables: () => IIgnoreTable[];
 }
 interface IQuery {
   id: string;

@@ -6,7 +6,8 @@ class DataClientsAPI {
   private dataSources: IDataClient[] = [];
   private dataTargets: IDataClient[] = [];
 
-  resetDataClients = () => {
+  resetDataClients = async () => {
+    await this.disconnectAll();
     this.dataClients = [];
     this.dataSources = [];
     this.dataTargets = [];
@@ -21,17 +22,23 @@ class DataClientsAPI {
     return this.dataClients;
   }
   addClients = (clients: IDataClient[]) => {
-    clients.forEach(this.addClient);
+    for (const client of clients) {
+      this.addClient(client);
+    }
     return this.dataClients;
   }
-  removeClient = (clientId: string) => {
+  removeClient = async (clientId: string) => {
+    const client = this.getClient(clientId);
+    if (client) await client.disconnect();
     spliceByKeyValue(this.dataClients, 'clientId', clientId);
     spliceByKeyValue(this.dataSources, 'clientId', clientId);
     spliceByKeyValue(this.dataTargets, 'clientId', clientId);
     return this.dataClients;
   }
-  removeClients = (clientIds: string[]) => {
-    clientIds.forEach(this.removeClient);
+  removeClients = async (clientIds: string[]) => {
+    for (const clientId of clientIds) {
+      await this.removeClient(clientId);
+    }
     return this.dataClients;
   }
   getClient = (clientId: string) => this.dataClients.find(client => client.clientId === clientId);
@@ -48,30 +55,38 @@ class DataClientsAPI {
     return this.dataTargets;
   }
 
-  connect = (clientId: string) => {
+  connect = async (clientId: string) => {
     const client = this.getClient(clientId);
-    if (client) return client.connect();
+    if (client) {
+      await client.connect();
+      return client;
+    }
     return Promise.reject(new Error(`Client ${clientId} not found`));
   }
-  connectAll = () => {
-    return Promise.all(this.dataClients.map(client => this.connect(client.clientId)));
-  }
-
-  fetch = () => {
-    return Promise.all(this.dataClients.map(client => client.fetch()));
+  connectAll = async () => {
+    for (const client of this.dataClients) {
+      await client.connect();
+    }
+    return this.dataClients;
   }
 
   dump = () => {
     return Promise.all(this.dataClients.map(client => client.dump()));
   }
 
-  disconnect = (clientId: string) => {
+  disconnect = async (clientId: string) => {
     const client = this.getClient(clientId);
-    if (client) return client.disconnect();
+    if (client) {
+      await client.disconnect();
+      return client;
+    }
     return Promise.reject(new Error(`Client ${clientId} not found`));
   }
-  disconnectAll = () => {
-    return Promise.all(this.dataClients.map(client => this.disconnect(client.clientId)));
+  disconnectAll = async () => {
+    for (const client of this.dataClients) {
+      await client.disconnect();
+    }
+    return this.dataClients;
   }
 }
 

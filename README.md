@@ -207,11 +207,11 @@ Returns the list of tables/collections to ignore for the specified client. If no
 
 #### `connectAll()`
 
-Connects to all clients. This must be called before calling `fetch()`. Returns a promise that resolves when all clients are connected. If `autoConnect` is set to `true` in the client options, this method does not need to be called. See [Client Options](#client-options) for more information.
+Connects to all clients. This must be called before calling `fetch()`. Returns a promise that resolves when all clients are connected.
 
 #### `connect(clientId: string)`
 
-Connects to the specified client. This must be called before calling `fetch()`. Returns a promise that resolves when the client is connected. If `autoConnect` is set to `true` in the client options, this method does not need to be called. See [Client Options](#client-options) for more information.
+Connects to the specified client. This must be called before calling `fetch()`. Returns a promise that resolves when the client is connected.
 
 #### `fetch()`
 
@@ -235,7 +235,6 @@ The following options can be set on a client:
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
-| `autoConnect` | `boolean` | `true` | If `true`, the client will automatically connect when `connect()` is called. |
 | `ignoreFields` | `string[]` | `[]` | An array of fields to ignore when fetching data. See [addIgnoreField()](#addignorefieldclientid-string-field-string) for more information. |
 | `ignoreTables` | `string[]` | `[]` | An array of tables/collections to ignore when fetching data. See [addIgnoreTable()](#addignoretableclientid-string-table-string) or [addIgnoreCollection()](#addignorecollectionclientid-string-collection-string) for more information. |
 

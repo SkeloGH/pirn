@@ -21,7 +21,7 @@ class MockDataClient implements IDataClient {
   public dump = jest.fn();
   public disconnect = jest.fn();
   
-  public addQuery = this.queriesAPI.addQuery;
+  public addQuery = jest.fn();
   public addQueries = this.queriesAPI.addQueries;
   public getQuery = this.queriesAPI.getQuery;
   public getQueries = this.queriesAPI.getQueries;

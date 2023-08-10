@@ -1,6 +1,6 @@
 import Pirn from "api";
 import QueriesAPI from "api/queries";
-import { query, config } from "../../__mock__";
+import { query, config, clients } from "../../__mock__";
 import MockDataClient from "../../__mock__/dataClient";
 
 
@@ -21,13 +21,14 @@ describe("Pirn query methods tests", () => {
     pirn.addQuery(query);
     expect(pirn.getQueries()).toEqual([query]);
   });
-  it("should add a query to all clients", () => {
+  it("should call addQuery on all clients when no clientId is set", () => {
     const _query = { ...query };
     delete _query.clientId;
-
+    pirn.addClients(clients);
     pirn.addQuery(_query);
-    const clientQueries = pirn.getClients().map(client => client.getQueries());
-    expect(clientQueries[0]).toEqual([_query]);
+    for (const client of pirn.getClients()) {
+      expect(client.addQuery).toHaveBeenCalledWith(_query);
+    }
   });
   it("should add queries", () => {
     pirn.addQueries([query]);

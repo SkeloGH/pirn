@@ -1,10 +1,6 @@
 import { IDataClient } from "interfaces";
-import QueriesAPI from "api/queries";
-import IgnoresAPI from "api/ignores";
 
 class MockDataClient implements IDataClient {
-  private queriesAPI: QueriesAPI = new QueriesAPI();
-  private ignoresAPI: IgnoresAPI = new IgnoresAPI();
   public type: "source" | "target" = "source";
   public clientId: string = "client";
   public db = {

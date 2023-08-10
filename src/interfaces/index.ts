@@ -18,9 +18,47 @@ interface IDataClientConfig {
 
 interface IDataClient extends IDataClientConfig {
   connect: () => Promise<unknown>;
+  /**
+   * After connecting the client, and adding queries, the fetch method can be called.
+   * This method will recursively fetch data from the client, identifying foreign keys
+   * along the way. Then it will store the data in a cache. This is an intensive process.
+   * 
+   * Client implementation should:
+   * 1. Use the query to fetch data, taking into account the ignoreFields and ignoreTables
+   * 2. Cache the data
+   * 3. Identify any fields that could be foreign keys
+   * 4. Re-run the query, this time including the foreign keys
+   * 5. Compare the results against the cached data
+   * 6. Repeat steps 3-5 until no new foreign keys are found
+   * 7. Store the results in the cache
+   * 8. Return the results stats
+   * @returns {Promise<unknown>}
+   * @memberof IDataClient
+   * */
   fetch: () => Promise<unknown>;
   dump: () => Promise<unknown>;
+  load: () => Promise<unknown>;
   disconnect: () => Promise<unknown>;
+  /**
+   * Client implementation should transform the query into a format that the client can use
+   * @param query
+   * @returns
+   * @memberof IDataClient
+   * @example
+   * // Example query
+   *  {
+   *    ...
+   *    from: ["users"],
+   *    where: {
+   *      keys: ["id"],
+   *      operator: "eq",
+   *      value: "1",
+   *    },
+   * }
+   * // Example transformed query for a SQL client
+   *  "SELECT * FROM users WHERE id = 1",
+   * 
+   **/
   addQuery: (query: IQuery) => IQuery[];
   addQueries: (queries: IQuery[]) => IQuery[];
   addIgnoreField: (ignoreField: IIgnoreField) => IIgnoreField[];

@@ -1,6 +1,6 @@
 interface IDataClient {
   type: "source" | "target";
-  origin?: IDataClient;
+  origin?: string;
   clientId: string;
   db: {
     url: string;

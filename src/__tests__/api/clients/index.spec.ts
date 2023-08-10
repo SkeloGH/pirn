@@ -3,6 +3,7 @@ import {
   client,
   clients,
   query,
+  targetClient,
 } from "__tests__/__mock__";
 import Pirn from "api";
 
@@ -22,6 +23,18 @@ describe("Pirn clients CRUD tests", () => {
     expect(pirn.getClients()).toEqual(clients);
     expect(pirn.getSourceClients()).toEqual([clients[0]]);
     expect(pirn.getTargetClients()).toEqual([clients[1]]);
+  });
+  it("should throw an error when adding a target client with no origin", () => {
+    const _targetClient = {
+      ...targetClient,
+      origin: undefined,
+    };
+    const message = `Target client ${_targetClient.clientId} must have an origin`;
+    try {
+      pirn.addClient(_targetClient);
+    } catch (err: unknown) {
+      expect((err as Error).message).toEqual(message);
+    }
   });
   it("should remove a client", async () => {
     pirn.addClient(client);

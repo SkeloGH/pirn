@@ -102,13 +102,6 @@ describe("Client connection tests", () => {
   beforeEach(async () => {
     await pirn.removeClients(["source-client", "target-client", "mock-client"]);
   });
-  it("should call dump on all clients", async () => {
-    pirn.addClients(clients);
-    await pirn.dump();
-    for (const client of clients) {
-      expect(client.dump).toHaveBeenCalled();
-    }
-  });
   it("should disconnect a client", async () => {
     pirn.addClient(client);
     const disconnect = await pirn.disconnect(client.clientId);
@@ -154,7 +147,12 @@ describe("Client dump tests", () => {
     pirn.addClients(clients);
     await pirn.dump();
     for (const client of clients) {
-      expect(client.dump).toHaveBeenCalled();
+      if (client.type === "source") {
+        expect(client.dump).toHaveBeenCalled();
+      }
+      if (client.type === "target") {
+        expect(client.load).toHaveBeenCalled();
+      }
     }
   });
 });

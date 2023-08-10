@@ -52,14 +52,15 @@ describe("Pirn clients CRUD tests", () => {
     expect(pirn.getSourceClients()).toEqual([]);
     expect(pirn.getTargetClients()).toEqual([]);
   });
-  it("should fetch all clients", async () => {
+  it("should call fetch on all clients", async () => {
     pirn.addClients(clients);
     pirn.addQuery({
       ...query,
       clientId: "source-client",
     });
-    const fetch = await pirn.fetch();
-    expect(fetch).toEqual([undefined, undefined]);
+    await pirn.fetch();
+    expect(clients[0].fetch).toHaveBeenCalled();
+    expect(clients[1].fetch).toHaveBeenCalled();
   });
   it("should throw an error when fetching with no queries", async () => {
     const pirn = new Pirn();
@@ -88,7 +89,7 @@ describe("Client connection tests", () => {
   beforeEach(async () => {
     await pirn.removeClients(["source-client", "target-client", "client"]);
   });
-  it("should dump all clients", async () => {
+  it("should call dump on all clients", async () => {
     pirn.addClients(clients);
     await pirn.dump();
     for (const client of clients) {

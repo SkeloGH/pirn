@@ -1,13 +1,16 @@
 {
-  "name": "@pirn/core",
+  "name": "pirn",
   "version": "0.1.0",
-  "description": "Data migration and synchronization tool supporting multiple data stores with a plugin system for extensibility.",
+  "description": "Data migration and synchronization tool supporting multiple data stores with a plugin system",
   "main": "index.js",
   "author": "Aaron Gonzalez",
   "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "test": "jest --coverage",
-    "lint": "eslint src",
+    "lint": "eslint -c .eslintrc.cjs --ext .ts packages",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -16,6 +19,7 @@
     "@typescript-eslint/parser": "^6.2.1",
     "eslint": "^8.46.0",
     "husky": "^8.0.0",
+    "lerna": "^7.1.5",
     "lint-staged": "^13.2.3",
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6"

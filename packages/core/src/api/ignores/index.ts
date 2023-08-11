@@ -1,4 +1,4 @@
-import {  IIgnoreField, IIgnoreTable } from 'interfaces';
+import {  IIgnoreField, IIgnoreTable } from '@pirn/types';
 
 class IgnoresAPI {
   private ignoreFields: IIgnoreField[] = [];

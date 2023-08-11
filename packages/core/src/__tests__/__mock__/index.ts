@@ -1,18 +1,19 @@
-import { IDataClient, IConfig, IQuery, IIgnoreField, IIgnoreTable } from "interfaces";
+import { IDataClient, IConfig, IQuery, IIgnoreField, IIgnoreTable } from "@pirn/types";
 import MockDataClient from "./dataClient";
 
 const JSONDumpPath = process.cwd() + "/pirn-dump.json";
 const client:IDataClient = new MockDataClient();
+const sourceClientID = "source-client";
 const sourceClient:IDataClient = {
   ...new MockDataClient(),
   type: "source",
-  clientId: "source-client",
+  clientId: sourceClientID,
 };
 const targetClient:IDataClient = {
   ...new MockDataClient(),
   type: "target",
   clientId: "target-client",
-  origin: sourceClient.clientId,
+  origin: sourceClientID,
 };
 
 const clients:IDataClient[] = [ sourceClient, targetClient];

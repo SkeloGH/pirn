@@ -1,0 +1,15 @@
+{
+  "name": "@pirn/core",
+  "version": "0.1.0",
+  "description": "Data migration and synchronization tool supporting multiple data stores with a plugin system",
+  "main": "index.js",
+  "author": "Aaron Gonzalez",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "@pirn/types": "^0.1.0"
+  }
+}

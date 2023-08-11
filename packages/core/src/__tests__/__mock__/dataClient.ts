@@ -1,4 +1,4 @@
-import { IDataClientOptions, IDataClient, IDataClientDBConfig, TClientType } from "interfaces";
+import { IDataClientOptions, IDataClient, IDataClientDBConfig, TClientType } from '@pirn/types';
 
 class MockDataClient implements IDataClient {
   public type: TClientType = "source";

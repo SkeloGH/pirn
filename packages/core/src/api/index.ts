@@ -1,4 +1,4 @@
-import { IConfig, IQuery } from 'interfaces';
+import { IConfig, IQuery } from '@pirn/types';
 import DataClientsAPI from 'api/clients';
 import QueriesAPI from 'api/queries';
 import DumpsAPI from 'api/dumps';

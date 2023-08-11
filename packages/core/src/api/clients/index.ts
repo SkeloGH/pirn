@@ -1,4 +1,4 @@
-import { IDataClient } from 'interfaces';
+import { IDataClient } from '@pirn/types';
 import { spliceByKeyValue } from 'utils';
 
 class DataClientsAPI {

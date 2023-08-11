@@ -1,4 +1,4 @@
-import { IQuery } from 'interfaces';
+import { IQuery } from '@pirn/types';
 import { spliceByKeyValue } from 'utils';
 
 class QueriesAPI {

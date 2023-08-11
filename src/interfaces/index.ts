@@ -17,6 +17,12 @@ interface IDataClientConfig {
 }
 
 interface IDataClient extends IDataClientConfig {
+  /**
+   * Client implementation should connect to the database, once the connection is established
+   * the client should index the database, identifying all tables and fields.
+   * @returns {Promise<unknown>}
+   * @memberof IDataClient
+   * */
   connect: () => Promise<unknown>;
   /**
    * After connecting the client, and adding queries, the fetch method can be called.

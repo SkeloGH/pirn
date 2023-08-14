@@ -2,7 +2,7 @@
   "name": "@pirn/core",
   "version": "0.1.0",
   "description": "Data migration and synchronization tool supporting multiple data stores with a plugin system",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "Aaron Gonzalez",
   "license": "MIT",
   "scripts": {

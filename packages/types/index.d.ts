@@ -13,7 +13,7 @@ interface IDataClientConfig {
   clientId: string;
   sourceId?: string;
   db: IDataClientDBConfig;
-  options?: IDataClientOptions
+  options?: IDataClientOptions;
 }
 
 interface IDataClient extends IDataClientConfig {

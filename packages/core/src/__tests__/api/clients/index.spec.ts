@@ -24,12 +24,12 @@ describe("Pirn clients CRUD tests", () => {
     expect(pirn.getSourceClients()).toEqual([clients[0]]);
     expect(pirn.getTargetClients()).toEqual([clients[1]]);
   });
-  it("should throw an error when adding a target client with no origin", () => {
+  it("should throw an error when adding a target client with no sourceId", () => {
     const _targetClient = {
       ...targetClient,
-      origin: undefined,
+      sourceId: undefined,
     };
-    const message = `Target client ${_targetClient.clientId} must have an origin`;
+    const message = `Target client ${_targetClient.clientId} needs a sourceId`;
     try {
       pirn.addClient(_targetClient);
     } catch (err: unknown) {

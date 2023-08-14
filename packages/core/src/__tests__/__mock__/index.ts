@@ -13,7 +13,7 @@ const targetClient:IDataClient = {
   ...new MockDataClient(),
   type: "target",
   clientId: "target-client",
-  origin: sourceClientID,
+  sourceId: sourceClientID,
 };
 
 const clients:IDataClient[] = [ sourceClient, targetClient];

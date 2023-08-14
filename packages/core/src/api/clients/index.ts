@@ -32,7 +32,7 @@ class DataClientsAPI {
     if (client.type === 'source') {
       this.dataSources.push(client);
     } else if (client.type === 'target') {
-      if (!client.origin) throw new Error(`Target client ${client.clientId} must have an origin`);
+      if (!client.sourceId) throw new Error(`Target client ${client.clientId} needs a sourceId`);
       this.dataTargets.push(client);
     }
     return this.dataClients;

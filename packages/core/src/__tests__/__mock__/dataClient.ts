@@ -6,6 +6,7 @@ class MockDataClient implements IDataClient {
   public db: IDataClientDBConfig = {
     url: "mock://url",
     name: "mock-name",
+    options: {}
   };
   public options?: IDataClientOptions;
 

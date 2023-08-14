@@ -6,12 +6,12 @@ interface IDataClientOptions {
 interface IDataClientDBConfig {
   url: string;
   name: string;
-  options?: object;
+  options: {[key: string]: unknown};
 }
 interface IDataClientConfig {
   type: TClientType;
   clientId: string;
-  origin?: string;
+  sourceId?: string;
   db: IDataClientDBConfig;
   options?: IDataClientOptions
 }
@@ -109,7 +109,7 @@ interface IIgnoreTable {
   table: string;
 }
 
-export { 
+export {
   TClientType,
   IDataClientOptions,
   IDataClientDBConfig,

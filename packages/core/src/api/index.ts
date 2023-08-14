@@ -1,10 +1,10 @@
 import { IConfig, IQuery } from '@pirn/types';
-import DataClientsAPI from 'api/clients';
-import QueriesAPI from 'api/queries';
-import DumpsAPI from 'api/dumps';
-import IgnoresAPI from 'api/ignores';
+import DataClientsAPI from '../api/clients';
+import QueriesAPI from '../api/queries';
+import DumpsAPI from '../api/dumps';
+import IgnoresAPI from '../api/ignores';
 
-class Pirn {
+export default class Pirn {
   private clientsAPI = new DataClientsAPI();
   private queriesAPI = new QueriesAPI();
   private dumpsAPI = new DumpsAPI();
@@ -82,7 +82,3 @@ class Pirn {
   public getIgnoreTables = this.ignoresAPI.getIgnoreTables;
 
 }
-
-
-
-export default Pirn;

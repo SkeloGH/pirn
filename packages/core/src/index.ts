@@ -1,1 +1,2 @@
-export * from 'api';
+import Pirn from "./api";
+module.exports = Pirn;

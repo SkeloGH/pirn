@@ -1,5 +1,5 @@
 import { IDataClient } from '@pirn/types';
-import { spliceByKeyValue } from 'utils';
+import { spliceByKeyValue } from '../../utils';
 
 class DataClientsAPI {
   private dataClients: IDataClient[] = [];

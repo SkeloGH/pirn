@@ -9,7 +9,7 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest --",
     "lint": "eslint -c .eslintrc.cjs --ext .ts packages",
     "prepare": "husky install"
   },

@@ -9,7 +9,7 @@ module.exports = {
       ],
       extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended-type-checked'],
       parserOptions: {
-        project: ['packages/**/tsconfig.json'],
+        project: ['packages/**/tsconfig.eslint.json'],
         tsconfigRootDir: __dirname,
       },
       plugins: ['@typescript-eslint'],

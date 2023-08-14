@@ -1,0 +1,15 @@
+{
+  "name": "@pirn/plugin-mongodb",
+  "version": "0.1.0",
+  "description": "MongoDB plugin for Pirn",
+  "main": "dist/index.js",
+  "author": "Aaron Gonzalez",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "@pirn/types": "^0.1.0"
+  }
+}

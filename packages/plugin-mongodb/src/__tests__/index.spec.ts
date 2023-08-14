@@ -1,3 +1,3 @@
-test("mock test", () => {
+it('returns true', () => {
   expect(true).toBe(true);
 });

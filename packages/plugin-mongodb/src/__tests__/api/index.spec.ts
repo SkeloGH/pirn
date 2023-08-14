@@ -5,7 +5,7 @@ const dataClientConfig = {
   clientId: "mock-client-id",
   sourceId: "mock-source",
   db: {
-    url: "mock-url",
+    host: "mock://url",
     name: "mock-name",
     options: {
       port: 27017,

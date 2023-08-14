@@ -4,7 +4,7 @@ class MockDataClient implements IDataClient {
   public type: TClientType = "source";
   public clientId: string = "mock-client";
   public db: IDataClientDBConfig = {
-    url: "mock://url",
+    host: "mock://url",
     name: "mock-name",
     options: {}
   };

@@ -4,7 +4,7 @@ interface IDataClientOptions {
   ignoreTables?: string[];
 }
 interface IDataClientDBConfig {
-  url: string;
+  host: string;
   name: string;
   options: {[key: string]: unknown};
 }

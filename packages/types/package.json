@@ -4,7 +4,6 @@
   "description": "TypeScript definitions for Pirn",
   "main": "./lib",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "types": ".",
   "keywords": [],

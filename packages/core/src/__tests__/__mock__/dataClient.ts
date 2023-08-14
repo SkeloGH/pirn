@@ -15,21 +15,21 @@ class MockDataClient implements IDataClient {
   public dump = jest.fn();
   public load = jest.fn();
   public disconnect = jest.fn();
-  
+
   public addQuery = jest.fn();
   public addQueries = jest.fn();
   public getQuery = jest.fn();
   public getQueries = jest.fn();
   public removeQuery = jest.fn();
   public removeQueries = jest.fn();
-  
+
   // Field methods
   public addIgnoreField = jest.fn();
   public addIgnoreFields = jest.fn();
   public removeIgnoreField = jest.fn();
   public removeIgnoreFields = jest.fn();
   public getIgnoreFields = jest.fn();
-  
+
   // Table methods
   public addIgnoreTable = jest.fn();
   public addIgnoreTables = jest.fn();

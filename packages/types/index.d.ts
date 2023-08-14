@@ -28,7 +28,7 @@ interface IDataClient extends IDataClientConfig {
    * After connecting the client, and adding queries, the fetch method can be called.
    * This method will recursively fetch data from the client, identifying foreign keys
    * along the way. Then it will store the data in a cache. This is an intensive process.
-   * 
+   *
    * Client implementation should:
    * 1. Use the query to fetch data, taking into account the ignoreFields and ignoreTables
    * 2. Cache the data
@@ -63,7 +63,7 @@ interface IDataClient extends IDataClientConfig {
    * }
    * // Example transformed query for a SQL client
    *  "SELECT * FROM users WHERE id = 1",
-   * 
+   *
    **/
   addQuery: (query: IQuery) => IQuery[];
   addQueries: (queries: IQuery[]) => IQuery[];

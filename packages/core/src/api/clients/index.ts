@@ -7,7 +7,7 @@ class DataClientsAPI {
   private dataTargets: IDataClient[] = [];
 
   /**
-   * 
+   *
    * Disconnects all clients and removes them from the clients registries.
    * @memberof DataClientsAPI
    * @returns {IDataClient[]}
@@ -20,7 +20,7 @@ class DataClientsAPI {
     return this.dataClients;
   }
   /**
-   * 
+   *
    * Depending on the client type, adds the client to the dataSources or dataTargets array,
    * it also keeps record of all clients in the dataClients array.
    * @param {IDataClient} client
@@ -38,7 +38,7 @@ class DataClientsAPI {
     return this.dataClients;
   }
   /**
-   * 
+   *
    * Depending on the client type, adds the client to the dataSources or dataTargets array,
    * it also keeps record of all clients in the dataClients array.
    * @param {IDataClient[]} clients
@@ -52,7 +52,7 @@ class DataClientsAPI {
     return this.dataClients;
   }
   /**
-   * 
+   *
    * Disconnects the client and removes it from the clients registries.
    * @param {string} clientId
    * @returns {IDataClient[]}
@@ -67,7 +67,7 @@ class DataClientsAPI {
     return this.dataClients;
   }
   /**
-   * 
+   *
    * Disconnects the clients and removes them from the clients registries.
    * @param {string[]} clientIds
    * @returns {IDataClient[]}
@@ -80,7 +80,7 @@ class DataClientsAPI {
     return this.dataClients;
   }
   /**
-   * 
+   *
    * Returns the client with the given clientId.
    * @param {string} clientId
    * @returns {(IDataClient | undefined)}
@@ -88,7 +88,7 @@ class DataClientsAPI {
    * */
   getClient = (clientId: string) => this.dataClients.find(client => client.clientId === clientId);
   /**
-   * 
+   *
    * Returns the clients with the given clientIds.
    * @param {string[]} clientIds
    * @returns {(IDataClient[])}
@@ -101,7 +101,7 @@ class DataClientsAPI {
     return this.dataClients;
   }
   /**
-   * 
+   *
    * Returns the clients of type source.
    * @returns {(IDataClient[])}
    * @memberof DataClientsAPI
@@ -110,7 +110,7 @@ class DataClientsAPI {
     return this.dataSources;
   }
   /**
-   * 
+   *
    * Returns the clients of type target.
    * @returns {(IDataClient[])}
    * @memberof DataClientsAPI
@@ -119,7 +119,7 @@ class DataClientsAPI {
     return this.dataTargets;
   }
   /**
-   * 
+   *
    * Connects the client with the given clientId. Each client has its own connect implementation.
    * If the client is not found, it returns a rejected promise.
    * @param {string} clientId
@@ -135,7 +135,7 @@ class DataClientsAPI {
     return Promise.reject(new Error(`Client ${clientId} not found`));
   }
   /**
-   * 
+   *
    * Connects all clients. Each client has its own connect implementation.
    * @returns {(Promise<IDataClient[]>)}
    * @memberof DataClientsAPI
@@ -147,7 +147,7 @@ class DataClientsAPI {
     return this.dataClients;
   }
   /**
-   * 
+   *
    * Disconnects the client with the given clientId.
    * Each client has its own disconnect implementation.
    * If the client is not found, it returns a rejected promise.
@@ -164,7 +164,7 @@ class DataClientsAPI {
     return Promise.reject(new Error(`Client ${clientId} not found`));
   }
   /**
-   * 
+   *
    * Disconnects all clients. Each client has its own disconnect implementation.
    * @returns {(Promise<IDataClient[]>)}
    * @memberof DataClientsAPI
@@ -176,7 +176,7 @@ class DataClientsAPI {
     return this.dataClients;
   }
   /**
-   * 
+   *
    * After fetching the data from the dataSources, it loads the data into the dataTargets.
    * @returns {Promise<any[]>}
    * @memberof DataClientsAPI

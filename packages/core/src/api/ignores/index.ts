@@ -1,9 +1,9 @@
-import {  IIgnoreField, IIgnoreTable } from '@pirn/types';
+import { IIgnoreField, IIgnoreTable } from '@pirn/types';
 
 class IgnoresAPI {
   private ignoreFields: IIgnoreField[] = [];
   private ignoreTables: IIgnoreTable[] = [];
-  
+
   // Field methods
   public addIgnoreField = (clientId: string, field: string) => {
     this.ignoreFields.push({ clientId, field });
@@ -26,7 +26,7 @@ class IgnoresAPI {
     if (!clientId) return this.ignoreFields;
     return this.ignoreFields.filter(_ => _.clientId === clientId);
   }
-  
+
   // Table methods
   public addIgnoreTable = (clientId: string, table: string) => {
     this.ignoreTables.push({ clientId, table });

@@ -15,6 +15,8 @@ module.exports = {
       plugins: ['@typescript-eslint'],
       rules: {
         'max-len': ['error', { code: 100 }],
+        'no-trailing-spaces': 'error',
+        'no-multi-spaces': 'error',
       }
     }
   ]

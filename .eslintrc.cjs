@@ -5,12 +5,11 @@ module.exports = {
   overrides: [
     {
       files: [
-        'packages/types/**/*.ts',
-        'packages/core/**/*.ts'
+        'packages/**/**/*.ts'
       ],
       extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended-type-checked'],
       parserOptions: {
-        project: ['packages/*/tsconfig.json'],
+        project: ['packages/**/tsconfig.json'],
         tsconfigRootDir: __dirname,
       },
       plugins: ['@typescript-eslint'],

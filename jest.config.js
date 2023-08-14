@@ -1,5 +1,5 @@
 module.exports = {
   projects: [
-    '<rootDir>/packages/core',
+    '<rootDir>/packages/**/jest.config.js',
   ],
 };

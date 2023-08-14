@@ -11,7 +11,8 @@
   "scripts": {
     "test": "jest --",
     "lint": "eslint -c .eslintrc.cjs --ext .ts packages",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build": "lerna run build"
   },
   "devDependencies": {
     "@types/jest": "^29.5.3",

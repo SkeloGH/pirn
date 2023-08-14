@@ -1,2 +1,4 @@
 jest.config.js
 .eslintrc.cjs
+dist/**/*
+

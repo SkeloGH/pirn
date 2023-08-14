@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+npx tsc --noEmit --project packages/core/tsconfig.json
+npx tsc --noEmit --project packages/plugin-mongodb/tsconfig.json
 npm run lint
 npm test

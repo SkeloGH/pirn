@@ -1,3 +1,4 @@
+import { Db } from 'mongodb'
 import {
   TClientType,
   IDataClientOptions,
@@ -9,12 +10,16 @@ import {
   IDataClientConfig
 } from "@pirn/types";
 
-export default class DataClient implements IDataClient {
+import DatabaseAPI from "./db";
+
+export default class MongoDBClient implements IDataClient {
   public type: TClientType;
   public clientId: IDataClientConfig["clientId"];
   public sourceId?: IDataClientConfig["sourceId"];
   public options?: IDataClientOptions;
   public db: IDataClientDBConfig;
+  protected dbAPI: DatabaseAPI;
+  protected dbConnection?: Db;
 
   constructor(config: IDataClientConfig) {
     this.type = config.type;
@@ -26,6 +31,7 @@ export default class DataClient implements IDataClient {
     this.options.ignoreFields = this.options.ignoreFields || [];
     this.options.ignoreTables = this.options.ignoreTables || [];
     this.validateConfig();
+    this.dbAPI = new DatabaseAPI(this.db);
   }
 
   private validateConfig = (): void => {
@@ -37,11 +43,12 @@ export default class DataClient implements IDataClient {
   };
 
 
-  connect = (): Promise<unknown> => {
-    throw new Error('Not implemented');
+  connect = async (): Promise<Db> => {
+    this.dbConnection = await this.dbAPI.connect();
+    return this.dbConnection;
   };
-  disconnect = (): Promise<unknown> => {
-    throw new Error('Not implemented');
+  disconnect = async (): Promise<void> => {
+    await this.dbAPI.disconnect();
   };
   query = (): Promise<unknown> => {
     throw new Error('Not implemented');

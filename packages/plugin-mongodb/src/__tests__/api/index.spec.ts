@@ -1,58 +1,42 @@
-import { TClientType } from "@pirn/types";
-import DataClient from "api";
-const dataClientConfig = {
-  type: "target" as TClientType,
-  clientId: "mock-client-id",
-  sourceId: "mock-source",
-  db: {
-    host: "mock://url",
-    name: "mock-name",
-    options: {
-      port: 27017,
-      user: "mock-user",
-      password: "mock-password",
-    },
-  },
-  options: {
-    ignoreFields: ["mock-ignore-field"],
-    ignoreTables: ["mock-ignore-table"],
-  },
-};
-const dataClient = new DataClient(dataClientConfig);
-describe("DataClient", () => {
+import { Db } from 'mongodb'
+import MongoDBClient from "../../api";
+import { mockClientConfig } from "../__mock__";
+
+
+describe("MongoDBClient", () => {
+  const client = new MongoDBClient(mockClientConfig);
   it("should have all required properties", () => {
-    expect(dataClient).toHaveProperty("type");
-    expect(dataClient).toHaveProperty("clientId");
-    expect(dataClient).toHaveProperty("sourceId");
-    expect(dataClient).toHaveProperty("db");
-    expect(dataClient).toHaveProperty("options");
-    expect(dataClient).toHaveProperty("options.ignoreFields");
-    expect(dataClient).toHaveProperty("options.ignoreTables");
+    expect(client).toHaveProperty("type");
+    expect(client).toHaveProperty("clientId");
+    expect(client).toHaveProperty("sourceId");
+    expect(client).toHaveProperty("db");
+    expect(client).toHaveProperty("options");
+    expect(client).toHaveProperty("options.ignoreFields");
+    expect(client).toHaveProperty("options.ignoreTables");
   });
-  it("should have all required methods", async () => {
+  it("should list all non-implemented methods", async () => {
     const methods = [
-      dataClient.connect,
-      dataClient.disconnect,
-      dataClient.query,
-      dataClient.fetch,
-      dataClient.dump,
-      dataClient.load,
-      dataClient.addQuery,
-      dataClient.addQueries,
-      dataClient.addIgnoreField,
-      dataClient.addIgnoreFields,
-      dataClient.addIgnoreTable,
-      dataClient.addIgnoreTables,
-      dataClient.removeQuery,
-      dataClient.removeQueries,
-      dataClient.removeIgnoreField,
-      dataClient.removeIgnoreFields,
-      dataClient.removeIgnoreTable,
-      dataClient.removeIgnoreTables,
-      dataClient.getQuery,
-      dataClient.getQueries,
-      dataClient.getIgnoreFields,
-      dataClient.getIgnoreTables,
+      client.disconnect,
+      client.query,
+      client.fetch,
+      client.dump,
+      client.load,
+      client.addQuery,
+      client.addQueries,
+      client.addIgnoreField,
+      client.addIgnoreFields,
+      client.addIgnoreTable,
+      client.addIgnoreTables,
+      client.removeQuery,
+      client.removeQueries,
+      client.removeIgnoreField,
+      client.removeIgnoreFields,
+      client.removeIgnoreTable,
+      client.removeIgnoreTables,
+      client.getQuery,
+      client.getQueries,
+      client.getIgnoreFields,
+      client.getIgnoreTables,
     ];
     for (const method of methods) {
       try {
@@ -64,53 +48,53 @@ describe("DataClient", () => {
   });
 });
 
-describe("DataClient.validateConfig", () => {
+describe("MongoDBClient.validateConfig", () => {
   it("should throw an error if type is target and sourceId is not provided", () => {
-    const { db } = dataClientConfig;
-    const _dataClientConfig = {
-      ...dataClientConfig,
+    const { db } = mockClientConfig;
+    const _mockClientConfig = {
+      ...mockClientConfig,
       clientId: '',
       sourceId: '',
       db,
     };
     try {
-      new DataClient(_dataClientConfig);
+      new MongoDBClient(_mockClientConfig);
     } catch (err: unknown) {
       expect((err as Error).message).toEqual("sourceId is required");
     }
   });
   it("should not throw an error if type is target and sourceId is provided", () => {
-    const { db } = dataClientConfig;
-    const _dataClientConfig = {
-      ...dataClientConfig,
+    const { db } = mockClientConfig;
+    const _mockClientConfig = {
+      ...mockClientConfig,
       clientId: '',
       db,
     };
     try {
-      new DataClient(_dataClientConfig);
+      new MongoDBClient(_mockClientConfig);
     } catch (err: unknown) {
       expect((err as Error).message).toEqual("sourceId is required");
     }
   });
 });
 
-describe("DataClient ignoreFields and ignoreTables", () => {
+describe("MongoDBClient ignoreFields and ignoreTables", () => {
   it("should have default ignoreFields and ignoreTables", () => {
-    const { type, sourceId, db } = dataClientConfig;
-    const _dataClientConfig = {
+    const { type, sourceId, db } = mockClientConfig;
+    const _mockClientConfig = {
       clientId: 'mock-client-id',
       type,
       sourceId,
       db,
     };
-    const dataClient = new DataClient(_dataClientConfig);
-    expect(dataClient.options?.ignoreFields).toEqual([]);
-    expect(dataClient.options?.ignoreTables).toEqual([]);
+    const client = new MongoDBClient(_mockClientConfig);
+    expect(client.options?.ignoreFields).toEqual([]);
+    expect(client.options?.ignoreTables).toEqual([]);
   });
 
   it("should have ignoreFields and ignoreTables", () => {
-    const { type, sourceId, db } = dataClientConfig;
-    const _dataClientConfig = {
+    const { type, sourceId, db } = mockClientConfig;
+    const _mockClientConfig = {
       clientId: 'mock-client-id',
       type,
       sourceId,
@@ -120,8 +104,43 @@ describe("DataClient ignoreFields and ignoreTables", () => {
         ignoreTables: ["mock-ignore-table"],
       },
     };
-    const dataClient = new DataClient(_dataClientConfig);
-    expect(dataClient.options?.ignoreFields).toEqual(["mock-ignore-field"]);
-    expect(dataClient.options?.ignoreTables).toEqual(["mock-ignore-table"]);
+    const client = new MongoDBClient(_mockClientConfig);
+    expect(client.options?.ignoreFields).toEqual(["mock-ignore-field"]);
+    expect(client.options?.ignoreTables).toEqual(["mock-ignore-table"]);
   });
+});
+
+describe("MongoDBClient.connect", () => {
+  const _validClientConfig = {
+    ...mockClientConfig,
+    db: {
+      ...mockClientConfig.db,
+      host: "mongodb://localhost:27017",
+    },
+  };
+  const client = new MongoDBClient(_validClientConfig);
+  it("should connect to the database", async () => {
+    const dbClient: Db = await client.connect();
+    expect(dbClient.databaseName).toEqual(_validClientConfig.db.name);
+    await client.disconnect();
+  });
+  it("should throw an error if connection fails", async () => {
+    const unknownhost = 'unknownhost';
+    const _mockClientConfig = {
+      ...mockClientConfig,
+      db: {
+        name: "mock-db",
+        host: `mongodb://${unknownhost}:27404`,
+        options: {
+          ...mockClientConfig.db.options,
+        }
+      },
+    };
+    const _client = new MongoDBClient(_mockClientConfig);
+    try {
+      await _client.connect();
+    } catch (err: unknown) {
+      expect((err as Error).message).toEqual(`getaddrinfo ENOTFOUND ${unknownhost}`);
+    }
+  }, 1500); // 1.5s timeout
 });

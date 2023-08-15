@@ -9,10 +9,11 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "jest --",
+    "build": "lerna run build",
     "lint": "eslint -c .eslintrc.cjs --ext .ts packages",
-    "prepare": "husky install",
-    "build": "lerna run build"
+    "test": "lerna run test",
+    "precompile": "lerna run precompile",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@types/jest": "^29.5.3",

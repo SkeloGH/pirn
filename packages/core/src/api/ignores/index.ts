@@ -51,6 +51,4 @@ class IgnoresAPI {
   };
 }
 
-
-
 export default IgnoresAPI;

@@ -3,27 +3,41 @@ interface IDataClientOptions {
   ignoreFields?: string[];
   ignoreTables?: string[];
 }
+/**
+ * @interface IDataClientDBConfig
+ * @property {string} host - The host of the database
+ * @property {string} name - The name of the database
+ * @property {object} options - The options for the database
+ * */
 interface IDataClientDBConfig {
   host: string;
   name: string;
   options: {[key: string]: unknown};
 }
+/**
+ * @interface IDataClientConfig
+ * @property {IDataClientDBConfig} db - The database configuration
+ * @property {TClientType} type - The type of client: "source" or "target"
+ * @property {string} clientId - The id of the implementing client (this)
+ * @property {string} sourceId - The id of the source client, only required for target clients
+ * @property {IDataClientOptions} options - The client options
+ */
 interface IDataClientConfig {
+  db: IDataClientDBConfig;
   type: TClientType;
   clientId: string;
   sourceId?: string;
-  db: IDataClientDBConfig;
   options?: IDataClientOptions;
 }
 
 interface IDataClient extends IDataClientConfig {
   /**
-   * Client implementation should connect to the database, once the connection is established
-   * the client should index the database, identifying all tables and fields.
-   * @returns {Promise<unknown>}
+   * Client implementations should connect to the database, once the connection is established
+   * the client should keep record of existing tables and fields.
+   * @returns {Promise<object>}
    * @memberof IDataClient
    * */
-  connect: () => Promise<unknown>;
+  connect: () => Promise<object>;
   /**
    * After connecting the client, and adding queries, the fetch method can be called.
    * This method will recursively fetch data from the client, identifying foreign keys

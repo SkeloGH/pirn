@@ -8,9 +8,13 @@
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint src",
-    "build": "tsc"
+    "build": "rm -rf ./dist && tsc"
   },
   "dependencies": {
-    "@pirn/types": "^0.1.0"
+    "@pirn/types": "^0.1.0",
+    "mongodb": "^5.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.0"
   }
 }

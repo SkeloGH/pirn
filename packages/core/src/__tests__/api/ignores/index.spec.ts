@@ -1,4 +1,4 @@
-import Pirn from "api";
+import Pirn from "../../../api";
 import {
   config,
   ignoreField,

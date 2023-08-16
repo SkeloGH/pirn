@@ -4,8 +4,8 @@ import {
   clients,
   query,
   targetClient,
-} from "__tests__/__mock__";
-import Pirn from "api";
+} from "../../../__tests__/__mock__";
+import Pirn from "../../../api";
 
 describe("Pirn clients CRUD tests", () => {
   const pirn = new Pirn(config);

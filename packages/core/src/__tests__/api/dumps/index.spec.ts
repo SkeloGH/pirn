@@ -1,5 +1,5 @@
-import Pirn from "api";
-import { JSONDumpPath, config } from "__tests__/__mock__";
+import Pirn from "../../../api";
+import { JSONDumpPath, config } from "../../../__tests__/__mock__";
 
 describe("Pirn JSON dump path methods tests", () => {
   const pirn = new Pirn(config);

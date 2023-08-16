@@ -102,7 +102,7 @@ interface IQuery {
   id: string;
   clientId?: string;
   from: string[];
-  where: string | {
+  where: {
     keys: string[];
     operator: TQueryOperator;
     value: TQueryValue;

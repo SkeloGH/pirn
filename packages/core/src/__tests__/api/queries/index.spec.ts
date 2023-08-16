@@ -1,7 +1,8 @@
-import Pirn from "api";
-import QueriesAPI from "api/queries";
+import Pirn from "../../../api";
+import QueriesAPI from "../../../api/queries";
 import { query, config, clients } from "../../__mock__";
 import MockDataClient from "../../__mock__/dataClient";
+import { IQuery } from "@pirn/types";
 
 
 describe("Pirn query methods tests", () => {
@@ -72,7 +73,7 @@ describe("Isolated QueryAPI methods tests", () => {
   it("should remove queries", () => {
     const queriesAPI = new QueriesAPI();
     queriesAPI.addQueries([query]);
-    queriesAPI.removeQueries(["query"]);
+    queriesAPI.removeQueries([query.id]);
     expect(queriesAPI.getQueries()).toEqual([]);
   });
   it("should get a query", () => {
@@ -84,5 +85,76 @@ describe("Isolated QueryAPI methods tests", () => {
     const queriesAPI = new QueriesAPI();
     queriesAPI.addQueries([query]);
     expect(queriesAPI.getQueries(["query"])).toEqual([query]);
+  });
+  it("should mark a query as invalid when value is empty object", () => {
+    const queriesAPI = new QueriesAPI();
+    const invalidQuery1: IQuery = {
+      id: 'invalid-query',
+      from: ['invalid-test'],
+      where: {
+        keys: ['invalid-key'],
+        operator: 'in',
+        value: {}
+      }
+    };
+
+    queriesAPI.addQuery(invalidQuery1);
+    expect(queriesAPI.getQueries()).toEqual([]);
+  });
+  it("should mark a query as invalid when value is empty array", () => {
+    const queriesAPI = new QueriesAPI();
+    const invalidQuery2: IQuery = {
+      id: 'invalid-query',
+      from: ['invalid-test'],
+      where: {
+        keys: ['invalid-key'],
+        operator: 'in',
+        value: []
+      }
+    };
+    queriesAPI.addQuery(invalidQuery2);
+    expect(queriesAPI.getQueries()).toEqual([]);
+  });
+  it("should mark a query as invalid when value is empty string", () => {
+    const queriesAPI = new QueriesAPI();
+    const invalidQuery3: IQuery = {
+      id: 'invalid-query',
+      from: ['invalid-test'],
+      where: {
+        keys: ['invalid-key'],
+        operator: 'eq',
+        value: ''
+      }
+    };
+    queriesAPI.addQuery(invalidQuery3);
+    expect(queriesAPI.getQueries()).toEqual([]);
+  });
+  it("should mark a query as invalid when keys is empty", () => {
+    const queriesAPI = new QueriesAPI();
+    const invalidQuery4: IQuery = {
+      id: 'invalid-query',
+      from: ['invalid-test'],
+      where: {
+        keys: [],
+        operator: 'eq',
+        value: 'any'
+      }
+    };
+    queriesAPI.addQuery(invalidQuery4);
+    expect(queriesAPI.getQueries()).toEqual([]);
+  });
+  it("should mark a query as invalid when from is empty", () => {
+    const queriesAPI = new QueriesAPI();
+    const invalidQuery5: IQuery = {
+      id: 'invalid-query',
+      from: [],
+      where: {
+        keys: [],
+        operator: 'eq',
+        value: 'any'
+      }
+    };
+    queriesAPI.addQuery(invalidQuery5);
+    expect(queriesAPI.getQueries()).toEqual([]);
   });
 });

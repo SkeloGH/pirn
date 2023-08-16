@@ -125,6 +125,7 @@ interface IIgnoreTable {
 
 export {
   TClientType,
+  TQueryValue,
   IDataClientOptions,
   IDataClientDBConfig,
   IDataClientConfig,

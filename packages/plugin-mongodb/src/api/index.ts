@@ -11,6 +11,7 @@ import {
 } from "@pirn/types";
 
 import DatabaseAPI from "./db";
+import QueryAPI from "./query";
 
 export default class MongoDBClient implements IDataClient {
   public type: TClientType;
@@ -18,8 +19,9 @@ export default class MongoDBClient implements IDataClient {
   public sourceId?: IDataClientConfig["sourceId"];
   public options?: IDataClientOptions;
   public db: IDataClientDBConfig;
-  protected dbAPI: DatabaseAPI;
+  protected DBAPI: DatabaseAPI;
   protected dbConnection?: Db;
+  protected QueryAPI: QueryAPI;
 
   constructor(config: IDataClientConfig) {
     this.type = config.type;
@@ -31,7 +33,8 @@ export default class MongoDBClient implements IDataClient {
     this.options.ignoreFields = this.options.ignoreFields || [];
     this.options.ignoreTables = this.options.ignoreTables || [];
     this.validateConfig();
-    this.dbAPI = new DatabaseAPI(this.db);
+    this.DBAPI = new DatabaseAPI(this.db);
+    this.QueryAPI = new QueryAPI();
   }
 
   private validateConfig = (): void => {
@@ -44,11 +47,11 @@ export default class MongoDBClient implements IDataClient {
 
 
   connect = async (): Promise<Db> => {
-    this.dbConnection = await this.dbAPI.connect();
+    this.dbConnection = await this.DBAPI.connect();
     return this.dbConnection;
   };
   disconnect = async (): Promise<void> => {
-    await this.dbAPI.disconnect();
+    await this.DBAPI.disconnect();
   };
   query = (): Promise<unknown> => {
     throw new Error('Not implemented');
@@ -62,11 +65,11 @@ export default class MongoDBClient implements IDataClient {
   load = (): Promise<unknown> => {
     throw new Error('Not implemented');
   };
-  addQuery = (): IQuery[] => {
-    throw new Error('Not implemented');
+  addQuery = (query: IQuery): IQuery[] => {
+    return this.QueryAPI.addQuery(query);
   };
-  addQueries = (): IQuery[] => {
-    throw new Error('Not implemented');
+  addQueries = (queries: IQuery[]): IQuery[] => {
+    return this.QueryAPI.addQueries(queries);
   };
   addIgnoreField = (): IIgnoreField[] => {
     throw new Error('Not implemented');
@@ -80,11 +83,11 @@ export default class MongoDBClient implements IDataClient {
   addIgnoreTables = (): IIgnoreTable[] => {
     throw new Error('Not implemented');
   };
-  removeQuery = (): IQuery[] => {
-    throw new Error('Not implemented');
+  removeQuery = (id: string): IQuery[] => {
+    return this.QueryAPI.removeQuery(id);
   };
-  removeQueries = (): IQuery[] => {
-    throw new Error('Not implemented');
+  removeQueries = (ids: string[]): IQuery[] => {
+    return this.QueryAPI.removeQueries(ids);
   };
   removeIgnoreField = (): IIgnoreField[] => {
     throw new Error('Not implemented');
@@ -98,11 +101,11 @@ export default class MongoDBClient implements IDataClient {
   removeIgnoreTables = (): IIgnoreTable[] => {
     throw new Error('Not implemented');
   };
-  getQuery = (): IQuery => {
-    throw new Error('Not implemented');
+  getQuery = (id: string): IQuery | undefined => {
+    return this.QueryAPI.getQuery(id);
   };
   getQueries = (): IQuery[] => {
-    throw new Error('Not implemented');
+    return this.QueryAPI.getQueries();
   };
   getIgnoreFields = (): IIgnoreField[] => {
     throw new Error('Not implemented');

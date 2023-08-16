@@ -1,7 +1,7 @@
-import { TClientType } from "@pirn/types";
+import { IDataClientConfig, IQuery } from "@pirn/types";
 
-export const mockClientConfig = {
-  type: "target" as TClientType,
+export const mockClientConfig: IDataClientConfig = {
+  type: "target",
   clientId: "mock-client-id",
   sourceId: "mock-source",
   db: {
@@ -14,5 +14,16 @@ export const mockClientConfig = {
   options: {
     ignoreFields: ["mock-ignore-field"],
     ignoreTables: ["mock-ignore-table"],
+  },
+};
+
+export const mockQuery: IQuery = {
+  id: "mock-query-id",
+  clientId: "mock-client-id",
+  from: ["mock-table"],
+  where: {
+    keys: ["mock-key"],
+    operator: "eq",
+    value: ["mock-value"],
   },
 };

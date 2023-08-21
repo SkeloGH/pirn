@@ -52,10 +52,11 @@ export default class Pirn {
   public getQuery = this.queriesAPI.getQuery;
   public getQueries = this.queriesAPI.getQueries;
   public addQuery = (query: IQuery) => {
+    if (!this.queriesAPI.isValidQuery(query)) throw new Error('Invalid query');
     if (query.clientId) {
       const client = this.clientsAPI.getClient(query.clientId);
-      if (client) client.addQuery(query);
       if (!client) throw new Error(`Client ${query.clientId} not found`);
+      if (client) client.addQuery(query);
     } else {
       const clients = this.clientsAPI.getClients();
       clients.forEach(client => client.addQuery(query));

@@ -4,7 +4,7 @@ import { spliceByKeyValue } from '../../utils';
 class QueriesAPI {
   private queries: IQuery[] = [];
 
-  private isValidQuery = (query: IQuery): boolean => {
+  public isValidQuery = (query: IQuery): boolean => {
     if (!query.from.length) return false;
     if (!query.where.keys.length) return false;
     if (!query.where.value) return false;

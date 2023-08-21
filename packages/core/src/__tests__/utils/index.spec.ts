@@ -1,4 +1,4 @@
-import { spliceByKeyValue } from "utils";
+import { spliceByKeyValue } from "../../utils";
 
 describe("utils tests", () => {
   it("should splice by key value", () => {

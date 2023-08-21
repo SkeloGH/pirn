@@ -1,15 +1,14 @@
 import { MongoClient, Db } from 'mongodb'
+import { LOCAL_MDB_URL, TEST_DB_NAME } from '../__mock__';
 
-const url = 'mongodb://localhost:27017';
-const client = new MongoClient(url);
-const dbName = 'pirn-plugin-mongodb-test';
+const client = new MongoClient(LOCAL_MDB_URL);
 let db: Db;
 
 
 async function main() {
   // Use connect method to connect to the server
   await client.connect();
-  const db = client.db(dbName);
+  const db = client.db(TEST_DB_NAME);
   return db
 }
 beforeAll(async () => {
@@ -26,7 +25,8 @@ describe('Test database', () => {
   it('should insert a doc into collection', async () => {
     const users = db.collection('users');
     await users.insertOne({ name: 'John' });
-    const insertedUser = await client.db(dbName).collection('users').findOne({ name: 'John' });
+    const insertedUser = await client.db(TEST_DB_NAME)
+      .collection('users').findOne({ name: 'John' });
     expect(insertedUser?.name).toEqual('John');
   });
 });

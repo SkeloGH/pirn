@@ -1,5 +1,5 @@
 import MongoDBClient from "../../api";
-import { mockClientConfig } from "../__mock__";
+import { mockClientConfig, MOCK_QUERY_ID, MOCK_IGNORE_FIELD, MOCK_IGNORE_TABLE } from "../__mock__";
 
 
 describe("MongoDBClient", () => {
@@ -15,8 +15,6 @@ describe("MongoDBClient", () => {
   });
   it("should list all non-implemented methods", async () => {
     const methods = [
-      client.query,
-      client.fetch,
       client.dump,
       client.load,
       client.addIgnoreField,
@@ -73,8 +71,9 @@ describe("MongoDBClient.validateConfig", () => {
 describe("MongoDBClient ignoreFields and ignoreTables", () => {
   it("should have default ignoreFields and ignoreTables", () => {
     const { type, sourceId, db } = mockClientConfig;
+    // ignoreFields and ignoreTables are optional and not present in this test
     const _mockClientConfig = {
-      clientId: 'mock-client-id',
+      clientId: MOCK_QUERY_ID,
       type,
       sourceId,
       db,
@@ -85,19 +84,8 @@ describe("MongoDBClient ignoreFields and ignoreTables", () => {
   });
 
   it("should have ignoreFields and ignoreTables", () => {
-    const { type, sourceId, db } = mockClientConfig;
-    const _mockClientConfig = {
-      clientId: 'mock-client-id',
-      type,
-      sourceId,
-      db,
-      options: {
-        ignoreFields: ["mock-ignore-field"],
-        ignoreTables: ["mock-ignore-table"],
-      },
-    };
-    const client = new MongoDBClient(_mockClientConfig);
-    expect(client.options?.ignoreFields).toEqual(["mock-ignore-field"]);
-    expect(client.options?.ignoreTables).toEqual(["mock-ignore-table"]);
+    const client = new MongoDBClient(mockClientConfig);
+    expect(client.options?.ignoreFields).toEqual([MOCK_IGNORE_FIELD]);
+    expect(client.options?.ignoreTables).toEqual([MOCK_IGNORE_TABLE]);
   });
 });

@@ -1,29 +1,40 @@
 import { IDataClientConfig, IQuery } from "@pirn/types";
 
+export const LOCAL_MDB_URL = 'mongodb://localhost:27017';
+export const TEST_DB_NAME = 'pirn-plugin-mongodb-test';
+export const MOCK_QUERY_ID = 'mock-query-id';
+export const MOCK_CLIENT_ID = 'mock-client-id';
+export const MOCK_SOURCE_ID = 'mock-source-id';
+export const MOCK_TABLE = 'mockTable';
+export const MOCK_FIELD = 'mockField';
+export const MOCK_VALUE = 'mock-value';
+export const MOCK_IGNORE_FIELD = 'mock-ignore-field';
+export const MOCK_IGNORE_TABLE = 'mock-ignore-table';
+
 export const mockClientConfig: IDataClientConfig = {
   type: "target",
-  clientId: "mock-client-id",
-  sourceId: "mock-source",
+  clientId: MOCK_CLIENT_ID,
+  sourceId: MOCK_SOURCE_ID,
   db: {
     host: "mock://url",
-    name: "mock-name",
+    name: TEST_DB_NAME,
     options: {
       serverSelectionTimeoutMS: 1000,
     }
   },
   options: {
-    ignoreFields: ["mock-ignore-field"],
-    ignoreTables: ["mock-ignore-table"],
+    ignoreFields: [MOCK_IGNORE_FIELD],
+    ignoreTables: [MOCK_IGNORE_TABLE],
   },
 };
 
 export const mockQuery: IQuery = {
-  id: "mock-query-id",
-  clientId: "mock-client-id",
-  from: ["mock-table"],
+  id: MOCK_QUERY_ID,
+  clientId: MOCK_CLIENT_ID,
+  from: [MOCK_TABLE],
   where: {
-    keys: ["mock-key"],
+    keys: [MOCK_FIELD],
     operator: "eq",
-    value: ["mock-value"],
+    value: [MOCK_VALUE],
   },
 };

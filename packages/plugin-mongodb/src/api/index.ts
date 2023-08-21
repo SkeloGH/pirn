@@ -45,20 +45,35 @@ export default class MongoDBClient implements IDataClient {
     }
   };
 
-
   connect = async (): Promise<Db> => {
     this.dbConnection = await this.DBAPI.connect();
     return this.dbConnection;
   };
+
   disconnect = async (): Promise<void> => {
     await this.DBAPI.disconnect();
   };
-  query = (): Promise<unknown> => {
-    throw new Error('Not implemented');
+
+  fetch = async (): Promise<unknown[]> => {
+    const queries = this.QueryAPI.getQueries();
+    let results: unknown[] = [];
+    const NO_QUERIES = 'No queries found';
+    if (!queries.length) return Promise.reject(new Error(NO_QUERIES));
+    // 1. Use the query to fetch data, taking into account the ignoreFields and ignoreTables
+    // TODO: Implement ignoreFields and ignoreTables
+    for (const query of queries) {
+      results = await this.DBAPI.fetch(query);
+    }
+    // 2. Cache the data
+    // 3. Identify any fields that could be foreign keys
+    // 4. Re-run the query, this time including the foreign keys
+    // 5. Compare the results against the cached data
+    // 6. Repeat steps 3-5 until no new foreign keys are found
+    // 7. Store the results in the cache
+    // 8. Return the results stats
+    return Promise.resolve(results);
   };
-  fetch = (): Promise<unknown> => {
-    throw new Error('Not implemented');
-  };
+
   dump = (): Promise<unknown> => {
     throw new Error('Not implemented');
   };
